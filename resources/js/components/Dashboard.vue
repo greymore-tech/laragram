@@ -16,9 +16,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(contact, index) in orderContacts" :key="index">
-                                    <th scope="row">{{ index+1 }}</th>
-                                    <td scope="row">{{ contact.first_name }} {{ contact.last_name }}</td>
+                                <tr
+                                    v-for="(contact, index) in orderContacts"
+                                    :key="index"
+                                >
+                                    <th scope="row">{{ index + 1 }}</th>
+                                    <td scope="row">
+                                        <a
+                                            :href="
+                                                'dashboard/messages/' +
+                                                    contact.id
+                                            "
+                                            >{{ contact.first_name }}
+                                            {{ contact.last_name }}</a
+                                        >
+                                    </td>
                                     <td scope="row">+{{ contact.phone }}</td>
                                 </tr>
                             </tbody>
@@ -36,7 +48,7 @@ export default {
     computed: {
         orderContacts() {
             return _.orderBy(this.contacts, "first_name", "asc");
-        },
-    },
+        }
+    }
 };
 </script>

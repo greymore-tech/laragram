@@ -23,3 +23,4 @@ Route::post('login/check', 'AuthController@loginCodeCheck')->name('auth.login.co
 Route::get('logout', 'AuthController@logout')->name('auth.logout');
 
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('dashboard/messages/{user_id}', 'DashboardController@messagesHistory')->name('dashboard.messages.history');
