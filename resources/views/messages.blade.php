@@ -19,5 +19,5 @@
 @endsection
 
 @section('content')
-    <messages :messages="{{ $messages }}" :users="{{ $users }}" :current_user="{{ $current_user }}"></messages>
+    <messages :messages="{{ $messages }}" :users="{{ $users }}" :current_user_id="{{ $current_user_id }}" :other_user_id="{{ $other_user_id }}"></messages>
 @endsection

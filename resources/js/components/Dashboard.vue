@@ -3,7 +3,7 @@
         <div class="row justify-content-center align-items-center mt-4 mb-4">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header text-center pt-3">
                         <h2>Your Contacts</h2>
                     </div>
                     <div class="card-body">

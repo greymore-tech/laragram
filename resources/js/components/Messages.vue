@@ -4,62 +4,117 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header text-center pt-3">
-                        <h2>Messages</h2>
+                        <h2>Your Chat</h2>
                     </div>
-                    <div v-for="(message, index) in orderMessages" :key="index">
-                        <div v-if="message.message != null">
-                            <div
-                                v-bind:class="[
-                                    current_user == message.from_id
-                                        ? 'float-right'
-                                        : 'float-left'
-                                ]"
-                            >
-                                <div class="card-body text-nowrap">
-                                    <div class="card pt-3 pr-4 pl-4">
-                                        <div class="row">
-                                            <div class="col">
-                                                <h3>{{ message.message }}</h3>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="row text-center">
-                                            <div class="col">
-                                                <div
-                                                    v-for="(user,
-                                                    index) in users"
-                                                    :key="index"
-                                                >
-                                                    <div
-                                                        v-if="
-                                                            user.id ==
-                                                                message.from_id
-                                                        "
-                                                    >
-                                                        <div
-                                                            v-if="
-                                                                current_user ==
-                                                                    user.id
-                                                            "
-                                                        >
-                                                            <p>You</p>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col card-size">
+                                <div class="card">
+                                    <div
+                                        v-for="(message,
+                                        index) in orderMessages"
+                                        :key="index"
+                                    >
+                                        <div v-if="message.message != null">
+                                            <div
+                                                v-bind:class="[
+                                                    current_user_id ==
+                                                    message.from_id
+                                                        ? 'float-right'
+                                                        : 'float-left'
+                                                ]"
+                                            >
+                                                <div class="card-body text-nowrap">
+                                                    <div class="card pt-3 pr-4 pl-4">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <h3>
+                                                                    {{
+                                                                    message.message
+                                                                    }}
+                                                                </h3>
+                                                            </div>
                                                         </div>
-                                                        <div v-else>
-                                                            <p>
-                                                                {{
-                                                                user.first_name
-                                                                }}
-                                                            </p>
+                                                        <hr />
+                                                        <div class="row text-center">
+                                                            <div class="col">
+                                                                <div
+                                                                    v-for="(user,
+                                                                    index) in users"
+                                                                    :key="index"
+                                                                >
+                                                                    <div
+                                                                        v-if="
+                                                                            user.id ==
+                                                                                message.from_id
+                                                                        "
+                                                                    >
+                                                                        <div
+                                                                            v-if="
+                                                                                current_user_id ==
+                                                                                    user.id
+                                                                            "
+                                                                        >
+                                                                            <p>You</p>
+                                                                        </div>
+                                                                        <div v-else>
+                                                                            <p>
+                                                                                {{
+                                                                                user.first_name
+                                                                                }}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p>
+                                                                    {{
+                                                                    message.date
+                                                                    | ago
+                                                                    }}
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col">
-                                                <p>{{ message.date | ago }}</p>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mt-4">
+                                <form
+                                    method="POST"
+                                    :action="
+                                        location +
+                                            '/dashboard/message/' +
+                                            other_user_id +
+                                            '/send'
+                                    "
+                                >
+                                    <input type="hidden" name="_token" :value="csrf" />
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <div class="form-group">
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    name="message"
+                                                    placeholder="Write your message..."
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary btn-block"
+                                            >Send</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -73,7 +128,7 @@
 import moment from "moment";
 
 export default {
-    props: ["messages", "users", "current_user"],
+    props: ["messages", "users", "current_user_id", "other_user_id"],
     filters: {
         ago(date) {
             return moment(date).format("h:mm A");
@@ -83,6 +138,14 @@ export default {
         orderMessages() {
             return _.orderBy(this.messages, "date", "asc");
         },
+    },
+    data() {
+        return {
+            csrf: document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"),
+            location: location.origin,
+        };
     },
 };
 </script>

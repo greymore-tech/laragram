@@ -53,3 +53,8 @@ body {
 .nav-pad {
     padding: 20px 100px;
 }
+
+.card-size {
+    max-height: 500px;
+    overflow-y: scroll;
+}

@@ -34,5 +34,5 @@ Vue.component("messages", require("./components/Messages.vue").default);
  */
 
 const app = new Vue({
-    el: "#app",
+    el: "#app"
 });
