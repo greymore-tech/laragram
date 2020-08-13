@@ -29,6 +29,11 @@
                                     <button type="submit" class="btn btn-primary btn-block">Login</button>
                                 </div>
                             </div>
+                            <div class="form-group text-center mt-4">
+                                <div class="col-md-6 offset-md-4">
+                                    <p>(Check for code in your telegram app)</p>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

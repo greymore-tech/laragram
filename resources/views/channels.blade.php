@@ -19,5 +19,5 @@
 @endsection
 
 @section('content')
-    <dashboard :contacts="{{ $contacts }}" :channels="{{ $channels }}"></dashboard>
+    <channels :messages="{{ $messages }}" :channel_info="{{ $channel_info }}" :current_user_id="{{ $current_user_id }}"></channels>
 @endsection

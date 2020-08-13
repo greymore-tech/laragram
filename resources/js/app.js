@@ -26,6 +26,7 @@ Vue.component(
 );
 Vue.component("dashboard", require("./components/Dashboard.vue").default);
 Vue.component("messages", require("./components/Messages.vue").default);
+Vue.component("channels", require("./components/Channels.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -34,5 +35,5 @@ Vue.component("messages", require("./components/Messages.vue").default);
  */
 
 const app = new Vue({
-    el: "#app"
+    el: "#app",
 });

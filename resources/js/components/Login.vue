@@ -3,7 +3,7 @@
         <div class="row justify-content-center align-items-center mt-5">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header text-center pt-3">
                         <h2>Login</h2>
                     </div>
                     <div class="card-body">
