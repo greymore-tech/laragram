@@ -96,6 +96,14 @@ class DashboardController extends Controller
         return view('groups', compact('messages', 'users', "group_info", 'current_user_id', 'current_user_first_name'));
     }
 
+    public function sendGroupMessage(Request $request, $group_id)
+    {
+        //  send the message to group based on group id
+        MadelineProto::getClient()->messages->sendMessage(['peer' => "chat#$group_id", 'message' => $request->message]);
+
+        return redirect()->back();
+    }
+
     public function createChannel(Request $request)
     {
         //  create a new channel with channel title and about
