@@ -83,6 +83,39 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col mt-4">
+                                <form
+                                    method="POST"
+                                    :action="
+                                        location +
+                                            '/dashboard/message/group/' +
+                                            group_info.id +
+                                            '/send'
+                                    "
+                                >
+                                    <input type="hidden" name="_token" :value="csrf" />
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <div class="form-group">
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    name="message"
+                                                    placeholder="Write your message..."
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary btn-block"
+                                            >Send</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
