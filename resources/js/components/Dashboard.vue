@@ -70,8 +70,8 @@
                                     </thead>
                                     <tbody>
                                         <tr
-                                            v-for="(contact,
-                                            index) in orderContacts"
+                                            v-for="(user,
+                                            index) in orderUsers"
                                             :key="index"
                                         >
                                             <th scope="row">{{ index + 1 }}</th>
@@ -79,20 +79,50 @@
                                                 <a
                                                     :href="
                                                         'dashboard/messages/user/' +
-                                                            contact.id
+                                                            user.id
                                                     "
                                                 >
-                                                    {{ contact.first_name }}
-                                                    {{ contact.last_name }}
+                                                    {{ user.first_name }}
+                                                    {{ user.last_name }}
                                                 </a>
                                             </td>
-                                            <td scope="row">+{{ contact.phone }}</td>
+                                            <td scope="row">+{{ user.phone }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="col">
-                                <h4 class="text-center">Your Groups and Channels</h4>
+                                <h4 class="text-center">Your Groups</h4>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Title</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            v-for="(group,
+                                            index) in orderGroups"
+                                            :key="index"
+                                        >
+                                            <th scope="row">{{ index + 1 }}</th>
+                                            <td scope="row">
+                                                <div>
+                                                    <a
+                                                        :href="
+                                                        'dashboard/messages/group/' +
+                                                            group.id
+                                                    "
+                                                    >{{ group.title }}</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col">
+                                <h4 class="text-center">Your Channels</h4>
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -108,12 +138,14 @@
                                         >
                                             <th scope="row">{{ index + 1 }}</th>
                                             <td scope="row">
-                                                <a
-                                                    :href="
+                                                <div>
+                                                    <a
+                                                        :href="
                                                         'dashboard/messages/channel/' +
                                                             channel.id
                                                     "
-                                                >{{ channel.title }}</a>
+                                                    >{{ channel.title }}</a>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -129,7 +161,7 @@
 
 <script>
 export default {
-    props: ["contacts", "channels"],
+    props: ["users", "groups", "channels"],
     data() {
         return {
             csrf: document
@@ -139,8 +171,11 @@ export default {
         };
     },
     computed: {
-        orderContacts() {
-            return _.orderBy(this.contacts, "first_name", "asc");
+        orderUsers() {
+            return _.orderBy(this.users, "first_name", "asc");
+        },
+        orderGroups() {
+            return _.orderBy(this.groups, "title", "asc");
         },
         orderChannels() {
             return _.orderBy(this.channels, "title", "asc");

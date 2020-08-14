@@ -25,7 +25,8 @@ Vue.component(
     require("./components/LoginCodeCheck.vue").default
 );
 Vue.component("dashboard", require("./components/Dashboard.vue").default);
-Vue.component("messages", require("./components/Messages.vue").default);
+Vue.component("users", require("./components/Users.vue").default);
+Vue.component("groups", require("./components/Groups.vue").default);
 Vue.component("channels", require("./components/Channels.vue").default);
 
 /**

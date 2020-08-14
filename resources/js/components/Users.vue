@@ -4,7 +4,7 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header text-center pt-3">
-                        <h2>{{ channel_info.title }}</h2>
+                        <h2>{{ other_user_info.first_name }} {{ other_user_info.last_name }}</h2>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -15,34 +15,57 @@
                                         index) in orderMessages"
                                         :key="index"
                                     >
-                                        <div
-                                            v-if="
-                                                message.message != null &&
-                                                    message.message != ''
-                                            "
-                                        >
-                                            <div class="card-body text-nowrap w-50">
+                                        <div v-if="message.message != null">
+                                            <div
+                                                class="card-body text-nowrap w-50"
+                                                v-bind:class="[
+                                                    current_user_id ==
+                                                    message.from_id
+                                                        ? 'float-right'
+                                                        : 'float-left'
+                                                ]"
+                                            >
                                                 <div class="card pt-3 pr-4 pl-4">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <h5
-                                                                class="text-wrap"
-                                                                v-html="
-                                                                    message.message
-                                                                "
-                                                                v-linkified
-                                                            >
+                                                            <h5 class="text-wrap">
+                                                                {{
+                                                                message.message
+                                                                }}
                                                             </h5>
                                                         </div>
                                                     </div>
                                                     <hr />
                                                     <div class="row text-center">
                                                         <div class="col">
-                                                            <p>
-                                                                {{
-                                                                channel_info.title
-                                                                }}
-                                                            </p>
+                                                            <div
+                                                                v-for="(user,
+                                                                index) in users"
+                                                                :key="index"
+                                                            >
+                                                                <div
+                                                                    v-if="
+                                                                        user.id ==
+                                                                            message.from_id
+                                                                    "
+                                                                >
+                                                                    <div
+                                                                        v-if="
+                                                                            current_user_id ==
+                                                                                user.id
+                                                                        "
+                                                                    >
+                                                                        <p>You</p>
+                                                                    </div>
+                                                                    <div v-else>
+                                                                        <p>
+                                                                            {{
+                                                                            user.first_name
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="col">
                                                             <p>
@@ -66,8 +89,8 @@
                                     method="POST"
                                     :action="
                                         location +
-                                            '/dashboard/message/channel/' +
-                                            channel_info.id +
+                                            '/dashboard/message/user/' +
+                                            other_user_id +
                                             '/send'
                                     "
                                 >
@@ -102,12 +125,15 @@
 
 <script>
 import moment from "moment";
-import linkify from "vue-linkify";
-
-Vue.directive("linkified", linkify);
 
 export default {
-    props: ["messages", "channel_info", "current_user_id"],
+    props: [
+        "messages",
+        "users",
+        "current_user_id",
+        "other_user_id",
+        "other_user_info",
+    ],
     data() {
         return {
             csrf: document
