@@ -63,5 +63,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+        //  telegram authentication check middleware
+        'login' => \App\Http\Middleware\Login::class,
+        'dashboard' => \App\Http\Middleware\Dashboard::class,
     ];
 }

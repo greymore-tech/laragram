@@ -15,13 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('login');
 
 //  User Authentication Routes
-Route::get('login', 'AuthController@login')->name('auth.login');
-Route::post('login', 'AuthController@loginCheck')->name('auth.login.check');
-Route::post('login/check', 'AuthController@loginCodeCheck')->name('auth.login.code.check');
-Route::get('logout', 'AuthController@logout')->name('auth.logout');
+Route::get('login', 'AuthController@login')->name('auth.login')->middleware('login');
+Route::post('login', 'AuthController@loginCheck')->name('auth.login.check')->middleware('login');
+Route::post('login/check', 'AuthController@loginCodeCheck')->name('auth.login.code.check')->middleware('login');
+Route::get('logout', 'AuthController@logout')->name('auth.logout')->middleware('dashboard');
 
 //  User Dashboard Routes
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
