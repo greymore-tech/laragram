@@ -8,7 +8,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col card-size">
+                            <div class="col card-size" id="card-scroll-bottom">
                                 <div class="card">
                                     <div
                                         v-for="(message,
@@ -31,8 +31,7 @@
                                                                     message.message
                                                                 "
                                                                 v-linkified
-                                                            >
-                                                            </h5>
+                                                            ></h5>
                                                         </div>
                                                     </div>
                                                     <hr />
@@ -101,6 +100,11 @@
 </template>
 
 <script>
+$(document).ready(function () {
+    var card_scroll_bottom = document.getElementById("card-scroll-bottom");
+    card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight;
+});
+
 import moment from "moment";
 import linkify from "vue-linkify";
 

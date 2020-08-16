@@ -2042,6 +2042,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+$(document).ready(function () {
+  var card_scroll_bottom = document.getElementById("card-scroll-bottom");
+  card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight;
+});
 
 
 Vue.directive("linkified", vue_linkify__WEBPACK_IMPORTED_MODULE_1___default.a);
@@ -2242,24 +2247,105 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["users", "groups", "channels"],
+  // props: ["users", "groups", "channels"],
+  props: ["messages", "chats", "users", "current_user_id"],
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
       location: location.origin
     };
   },
-  computed: {
-    orderUsers: function orderUsers() {
-      return _.orderBy(this.users, "first_name", "asc");
-    },
-    orderGroups: function orderGroups() {
-      return _.orderBy(this.groups, "title", "asc");
-    },
-    orderChannels: function orderChannels() {
-      return _.orderBy(this.channels, "title", "asc");
-    }
+  computed: {// orderUserGroupsChannels() {
+    //     return _.orderBy(this.users, "first_name", "asc");
+    // },
+    // orderUsers() {
+    //     return _.orderBy(this.users, "first_name", "asc");
+    // },
+    // orderGroups() {
+    //     return _.orderBy(this.groups, "title", "asc");
+    // },
+    // orderChannels() {
+    //     return _.orderBy(this.channels, "title", "asc");
+    // },
   }
 });
 
@@ -2408,6 +2494,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+$(document).ready(function () {
+  var card_scroll_bottom = document.getElementById("card-scroll-bottom");
+  card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight;
+});
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["messages", "users", "group_info", "current_user_id"],
@@ -2707,6 +2797,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+$(document).ready(function () {
+  var card_scroll_bottom = document.getElementById("card-scroll-bottom");
+  card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight;
+});
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["messages", "users", "current_user_id", "other_user_id", "other_user_info"],
@@ -62024,81 +62118,92 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col card-size" }, [
-                  _c(
-                    "div",
-                    { staticClass: "card" },
-                    _vm._l(_vm.orderMessages, function(message, index) {
-                      return _c("div", { key: index }, [
-                        message.message != null && message.message != ""
-                          ? _c("div", [
-                              _c(
-                                "div",
-                                { staticClass: "card-body text-nowrap w-50" },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticClass: "card pt-3 pr-4 pl-4" },
-                                    [
-                                      _c("div", { staticClass: "row" }, [
-                                        _c("div", { staticClass: "col" }, [
-                                          _c("h5", {
-                                            directives: [
-                                              {
-                                                name: "linkified",
-                                                rawName: "v-linkified"
+                _c(
+                  "div",
+                  {
+                    staticClass: "col card-size",
+                    attrs: { id: "card-scroll-bottom" }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "card" },
+                      _vm._l(_vm.orderMessages, function(message, index) {
+                        return _c("div", { key: index }, [
+                          message.message != null && message.message != ""
+                            ? _c("div", [
+                                _c(
+                                  "div",
+                                  { staticClass: "card-body text-nowrap w-50" },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "card pt-3 pr-4 pl-4" },
+                                      [
+                                        _c("div", { staticClass: "row" }, [
+                                          _c("div", { staticClass: "col" }, [
+                                            _c("h5", {
+                                              directives: [
+                                                {
+                                                  name: "linkified",
+                                                  rawName: "v-linkified"
+                                                }
+                                              ],
+                                              staticClass: "text-wrap",
+                                              domProps: {
+                                                innerHTML: _vm._s(
+                                                  message.message
+                                                )
                                               }
-                                            ],
-                                            staticClass: "text-wrap",
-                                            domProps: {
-                                              innerHTML: _vm._s(message.message)
-                                            }
-                                          })
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("hr"),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "row text-center" },
-                                        [
-                                          _c("div", { staticClass: "col" }, [
-                                            _c("p", [
-                                              _vm._v(
-                                                "\n                                                            " +
-                                                  _vm._s(
-                                                    _vm.channel_info.title
-                                                  ) +
-                                                  "\n                                                        "
-                                              )
-                                            ])
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("div", { staticClass: "col" }, [
-                                            _c("p", [
-                                              _vm._v(
-                                                "\n                                                            " +
-                                                  _vm._s(
-                                                    _vm._f("ago")(message.date)
-                                                  ) +
-                                                  "\n                                                        "
-                                              )
-                                            ])
+                                            })
                                           ])
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              )
-                            ])
-                          : _vm._e()
-                      ])
-                    }),
-                    0
-                  )
-                ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("hr"),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "row text-center" },
+                                          [
+                                            _c("div", { staticClass: "col" }, [
+                                              _c("p", [
+                                                _vm._v(
+                                                  "\n                                                            " +
+                                                    _vm._s(
+                                                      _vm.channel_info.title
+                                                    ) +
+                                                    "\n                                                        "
+                                                )
+                                              ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("div", { staticClass: "col" }, [
+                                              _c("p", [
+                                                _vm._v(
+                                                  "\n                                                            " +
+                                                    _vm._s(
+                                                      _vm._f("ago")(
+                                                        message.date
+                                                      )
+                                                    ) +
+                                                    "\n                                                        "
+                                                )
+                                              ])
+                                            ])
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      0
+                    )
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
@@ -62233,7 +62338,7 @@ var render = function() {
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col" }, [
                   _c("h4", { staticClass: "text-center" }, [
-                    _vm._v("Your Contacts")
+                    _vm._v("Recent Chats")
                   ]),
                   _vm._v(" "),
                   _c("table", { staticClass: "table" }, [
@@ -62241,108 +62346,152 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "tbody",
-                      _vm._l(_vm.orderUsers, function(user, index) {
+                      _vm._l(_vm.messages, function(message, index) {
                         return _c("tr", { key: index }, [
                           _c("th", { attrs: { scope: "row" } }, [
                             _vm._v(_vm._s(index + 1))
                           ]),
                           _vm._v(" "),
-                          _c("td", { attrs: { scope: "row" } }, [
-                            _c(
-                              "a",
-                              {
-                                attrs: {
-                                  href: "dashboard/messages/user/" + user.id
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                                " +
-                                    _vm._s(user.first_name) +
-                                    "\n                                                " +
-                                    _vm._s(user.last_name) +
-                                    "\n                                            "
-                                )
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { attrs: { scope: "row" } }, [
-                            _vm._v("+" + _vm._s(user.phone))
-                          ])
-                        ])
-                      }),
-                      0
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col" }, [
-                  _c("h4", { staticClass: "text-center" }, [
-                    _vm._v("Your Groups")
-                  ]),
-                  _vm._v(" "),
-                  _c("table", { staticClass: "table" }, [
-                    _vm._m(5),
-                    _vm._v(" "),
-                    _c(
-                      "tbody",
-                      _vm._l(_vm.orderGroups, function(group, index) {
-                        return _c("tr", { key: index }, [
-                          _c("th", { attrs: { scope: "row" } }, [
-                            _vm._v(_vm._s(index + 1))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { attrs: { scope: "row" } }, [
-                            _c("div", [
-                              _c(
-                                "a",
-                                {
-                                  attrs: {
-                                    href: "dashboard/messages/group/" + group.id
-                                  }
-                                },
-                                [_vm._v(_vm._s(group.title))]
+                          message.to_id["_"] == "peerUser"
+                            ? _c(
+                                "td",
+                                { attrs: { scope: "row" } },
+                                _vm._l(_vm.users, function(user, index) {
+                                  return _c("div", { key: index }, [
+                                    message.from_id == _vm.current_user_id
+                                      ? _c("div", [
+                                          message.to_id.user_id == user.id
+                                            ? _c("div", [
+                                                user.first_name != null
+                                                  ? _c("div", [
+                                                      _c(
+                                                        "a",
+                                                        {
+                                                          attrs: {
+                                                            href:
+                                                              "dashboard/messages/user/" +
+                                                              user.id
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              user.first_name
+                                                            ) +
+                                                              " " +
+                                                              _vm._s(
+                                                                user.last_name
+                                                              )
+                                                          )
+                                                        ]
+                                                      )
+                                                    ])
+                                                  : _c("div", [
+                                                      _c("p", [
+                                                        _vm._v(
+                                                          "Deleted Account"
+                                                        )
+                                                      ])
+                                                    ])
+                                              ])
+                                            : _vm._e()
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    message.to_id.user_id == _vm.current_user_id
+                                      ? _c("div", [
+                                          message.from_id == user.id
+                                            ? _c("div", [
+                                                user.first_name != null
+                                                  ? _c("div", [
+                                                      _c(
+                                                        "a",
+                                                        {
+                                                          attrs: {
+                                                            href:
+                                                              "dashboard/messages/user/" +
+                                                              user.id
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              user.first_name
+                                                            ) +
+                                                              " " +
+                                                              _vm._s(
+                                                                user.last_name
+                                                              )
+                                                          )
+                                                        ]
+                                                      )
+                                                    ])
+                                                  : _c("div", [
+                                                      _c("p", [
+                                                        _vm._v(
+                                                          "Deleted Account"
+                                                        )
+                                                      ])
+                                                    ])
+                                              ])
+                                            : _vm._e()
+                                        ])
+                                      : _vm._e()
+                                  ])
+                                }),
+                                0
                               )
-                            ])
-                          ])
-                        ])
-                      }),
-                      0
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col" }, [
-                  _c("h4", { staticClass: "text-center" }, [
-                    _vm._v("Your Channels")
-                  ]),
-                  _vm._v(" "),
-                  _c("table", { staticClass: "table" }, [
-                    _vm._m(6),
-                    _vm._v(" "),
-                    _c(
-                      "tbody",
-                      _vm._l(_vm.orderChannels, function(channel, index) {
-                        return _c("tr", { key: index }, [
-                          _c("th", { attrs: { scope: "row" } }, [
-                            _vm._v(_vm._s(index + 1))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { attrs: { scope: "row" } }, [
-                            _c("div", [
-                              _c(
-                                "a",
-                                {
-                                  attrs: {
-                                    href:
-                                      "dashboard/messages/channel/" + channel.id
-                                  }
-                                },
-                                [_vm._v(_vm._s(channel.title))]
+                            : message.to_id["_"] == "peerChat"
+                            ? _c(
+                                "td",
+                                { attrs: { scope: "row" } },
+                                _vm._l(_vm.chats, function(chat, index) {
+                                  return _c("div", { key: index }, [
+                                    message.to_id.chat_id == chat.id
+                                      ? _c("div", [
+                                          _c(
+                                            "a",
+                                            {
+                                              attrs: {
+                                                href:
+                                                  "dashboard/messages/group/" +
+                                                  chat.id
+                                              }
+                                            },
+                                            [_vm._v(_vm._s(chat.title))]
+                                          )
+                                        ])
+                                      : _vm._e()
+                                  ])
+                                }),
+                                0
                               )
-                            ])
-                          ])
+                            : message.to_id["_"] == "peerChannel"
+                            ? _c(
+                                "td",
+                                { attrs: { scope: "row" } },
+                                _vm._l(_vm.chats, function(chat, index) {
+                                  return _c("div", { key: index }, [
+                                    message.to_id.channel_id == chat.id
+                                      ? _c("div", [
+                                          _c(
+                                            "a",
+                                            {
+                                              attrs: {
+                                                href:
+                                                  "dashboard/messages/channel/" +
+                                                  chat.id
+                                              }
+                                            },
+                                            [_vm._v(_vm._s(chat.title))]
+                                          )
+                                        ])
+                                      : _vm._e()
+                                  ])
+                                }),
+                                0
+                              )
+                            : _vm._e()
                         ])
                       }),
                       0
@@ -62432,33 +62581,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Number")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Title")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Title")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")])
       ])
     ])
   }
@@ -62499,110 +62622,123 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col card-size" }, [
-                  _c(
-                    "div",
-                    { staticClass: "card" },
-                    _vm._l(_vm.orderMessages, function(message, index) {
-                      return _c("div", { key: index }, [
-                        message.message != null
-                          ? _c("div", [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "card-body text-nowrap w-50",
-                                  class: [
-                                    _vm.current_user_id == message.from_id
-                                      ? "float-right"
-                                      : "float-left"
-                                  ]
-                                },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticClass: "card pt-3 pr-4 pl-4" },
-                                    [
-                                      _c("div", { staticClass: "row" }, [
-                                        _c("div", { staticClass: "col" }, [
-                                          _c(
-                                            "h5",
-                                            { staticClass: "text-wrap" },
-                                            [
-                                              _vm._v(
-                                                "\n                                                            " +
-                                                  _vm._s(message.message) +
-                                                  "\n                                                        "
-                                              )
-                                            ]
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("hr"),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "row text-center" },
-                                        [
-                                          _c(
-                                            "div",
-                                            { staticClass: "col" },
-                                            _vm._l(_vm.users, function(
-                                              user,
-                                              index
-                                            ) {
-                                              return _c("div", { key: index }, [
-                                                user.id == message.from_id
-                                                  ? _c("div", [
-                                                      _vm.current_user_id ==
-                                                      user.id
-                                                        ? _c("div", [
-                                                            _c("p", [
-                                                              _vm._v("You")
-                                                            ])
-                                                          ])
-                                                        : _c("div", [
-                                                            _c("p", [
-                                                              _vm._v(
-                                                                "\n                                                                        " +
-                                                                  _vm._s(
-                                                                    user.first_name
-                                                                  ) +
-                                                                  "\n                                                                    "
-                                                              )
-                                                            ])
-                                                          ])
-                                                    ])
-                                                  : _vm._e()
-                                              ])
-                                            }),
-                                            0
-                                          ),
-                                          _vm._v(" "),
-                                          _c("div", { staticClass: "col" }, [
-                                            _c("p", [
-                                              _vm._v(
-                                                "\n                                                            " +
-                                                  _vm._s(
-                                                    _vm._f("ago")(message.date)
-                                                  ) +
-                                                  "\n                                                        "
-                                              )
-                                            ])
-                                          ])
-                                        ]
-                                      )
+                _c(
+                  "div",
+                  {
+                    staticClass: "col card-size",
+                    attrs: { id: "card-scroll-bottom" }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "card" },
+                      _vm._l(_vm.orderMessages, function(message, index) {
+                        return _c("div", { key: index }, [
+                          message.message != null
+                            ? _c("div", [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "card-body text-nowrap w-50",
+                                    class: [
+                                      _vm.current_user_id == message.from_id
+                                        ? "float-right"
+                                        : "float-left"
                                     ]
-                                  )
-                                ]
-                              )
-                            ])
-                          : _vm._e()
-                      ])
-                    }),
-                    0
-                  )
-                ])
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "card pt-3 pr-4 pl-4" },
+                                      [
+                                        _c("div", { staticClass: "row" }, [
+                                          _c("div", { staticClass: "col" }, [
+                                            _c(
+                                              "h5",
+                                              { staticClass: "text-wrap" },
+                                              [
+                                                _vm._v(
+                                                  "\n                                                            " +
+                                                    _vm._s(message.message) +
+                                                    "\n                                                        "
+                                                )
+                                              ]
+                                            )
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("hr"),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "row text-center" },
+                                          [
+                                            _c(
+                                              "div",
+                                              { staticClass: "col" },
+                                              _vm._l(_vm.users, function(
+                                                user,
+                                                index
+                                              ) {
+                                                return _c(
+                                                  "div",
+                                                  { key: index },
+                                                  [
+                                                    user.id == message.from_id
+                                                      ? _c("div", [
+                                                          _vm.current_user_id ==
+                                                          user.id
+                                                            ? _c("div", [
+                                                                _c("p", [
+                                                                  _vm._v("You")
+                                                                ])
+                                                              ])
+                                                            : _c("div", [
+                                                                _c("p", [
+                                                                  _vm._v(
+                                                                    "\n                                                                        " +
+                                                                      _vm._s(
+                                                                        user.first_name
+                                                                      ) +
+                                                                      "\n                                                                    "
+                                                                  )
+                                                                ])
+                                                              ])
+                                                        ])
+                                                      : _vm._e()
+                                                  ]
+                                                )
+                                              }),
+                                              0
+                                            ),
+                                            _vm._v(" "),
+                                            _c("div", { staticClass: "col" }, [
+                                              _c("p", [
+                                                _vm._v(
+                                                  "\n                                                            " +
+                                                    _vm._s(
+                                                      _vm._f("ago")(
+                                                        message.date
+                                                      )
+                                                    ) +
+                                                    "\n                                                        "
+                                                )
+                                              ])
+                                            ])
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      0
+                    )
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
@@ -62942,110 +63078,123 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col card-size" }, [
-                  _c(
-                    "div",
-                    { staticClass: "card" },
-                    _vm._l(_vm.orderMessages, function(message, index) {
-                      return _c("div", { key: index }, [
-                        message.message != null
-                          ? _c("div", [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "card-body text-nowrap w-50",
-                                  class: [
-                                    _vm.current_user_id == message.from_id
-                                      ? "float-right"
-                                      : "float-left"
-                                  ]
-                                },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticClass: "card pt-3 pr-4 pl-4" },
-                                    [
-                                      _c("div", { staticClass: "row" }, [
-                                        _c("div", { staticClass: "col" }, [
-                                          _c(
-                                            "h5",
-                                            { staticClass: "text-wrap" },
-                                            [
-                                              _vm._v(
-                                                "\n                                                            " +
-                                                  _vm._s(message.message) +
-                                                  "\n                                                        "
-                                              )
-                                            ]
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("hr"),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "row text-center" },
-                                        [
-                                          _c(
-                                            "div",
-                                            { staticClass: "col" },
-                                            _vm._l(_vm.users, function(
-                                              user,
-                                              index
-                                            ) {
-                                              return _c("div", { key: index }, [
-                                                user.id == message.from_id
-                                                  ? _c("div", [
-                                                      _vm.current_user_id ==
-                                                      user.id
-                                                        ? _c("div", [
-                                                            _c("p", [
-                                                              _vm._v("You")
-                                                            ])
-                                                          ])
-                                                        : _c("div", [
-                                                            _c("p", [
-                                                              _vm._v(
-                                                                "\n                                                                        " +
-                                                                  _vm._s(
-                                                                    user.first_name
-                                                                  ) +
-                                                                  "\n                                                                    "
-                                                              )
-                                                            ])
-                                                          ])
-                                                    ])
-                                                  : _vm._e()
-                                              ])
-                                            }),
-                                            0
-                                          ),
-                                          _vm._v(" "),
-                                          _c("div", { staticClass: "col" }, [
-                                            _c("p", [
-                                              _vm._v(
-                                                "\n                                                            " +
-                                                  _vm._s(
-                                                    _vm._f("ago")(message.date)
-                                                  ) +
-                                                  "\n                                                        "
-                                              )
-                                            ])
-                                          ])
-                                        ]
-                                      )
+                _c(
+                  "div",
+                  {
+                    staticClass: "col card-size",
+                    attrs: { id: "card-scroll-bottom" }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "card" },
+                      _vm._l(_vm.orderMessages, function(message, index) {
+                        return _c("div", { key: index }, [
+                          message.message != null
+                            ? _c("div", [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "card-body text-nowrap w-50",
+                                    class: [
+                                      _vm.current_user_id == message.from_id
+                                        ? "float-right"
+                                        : "float-left"
                                     ]
-                                  )
-                                ]
-                              )
-                            ])
-                          : _vm._e()
-                      ])
-                    }),
-                    0
-                  )
-                ])
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "card pt-3 pr-4 pl-4" },
+                                      [
+                                        _c("div", { staticClass: "row" }, [
+                                          _c("div", { staticClass: "col" }, [
+                                            _c(
+                                              "h5",
+                                              { staticClass: "text-wrap" },
+                                              [
+                                                _vm._v(
+                                                  "\n                                                            " +
+                                                    _vm._s(message.message) +
+                                                    "\n                                                        "
+                                                )
+                                              ]
+                                            )
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("hr"),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "row text-center" },
+                                          [
+                                            _c(
+                                              "div",
+                                              { staticClass: "col" },
+                                              _vm._l(_vm.users, function(
+                                                user,
+                                                index
+                                              ) {
+                                                return _c(
+                                                  "div",
+                                                  { key: index },
+                                                  [
+                                                    user.id == message.from_id
+                                                      ? _c("div", [
+                                                          _vm.current_user_id ==
+                                                          user.id
+                                                            ? _c("div", [
+                                                                _c("p", [
+                                                                  _vm._v("You")
+                                                                ])
+                                                              ])
+                                                            : _c("div", [
+                                                                _c("p", [
+                                                                  _vm._v(
+                                                                    "\n                                                                        " +
+                                                                      _vm._s(
+                                                                        user.first_name
+                                                                      ) +
+                                                                      "\n                                                                    "
+                                                                  )
+                                                                ])
+                                                              ])
+                                                        ])
+                                                      : _vm._e()
+                                                  ]
+                                                )
+                                              }),
+                                              0
+                                            ),
+                                            _vm._v(" "),
+                                            _c("div", { staticClass: "col" }, [
+                                              _c("p", [
+                                                _vm._v(
+                                                  "\n                                                            " +
+                                                    _vm._s(
+                                                      _vm._f("ago")(
+                                                        message.date
+                                                      )
+                                                    ) +
+                                                    "\n                                                        "
+                                                )
+                                              ])
+                                            ])
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      0
+                    )
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [

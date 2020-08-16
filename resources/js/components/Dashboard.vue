@@ -59,92 +59,75 @@
                         <hr />
                         <div class="row">
                             <div class="col">
-                                <h4 class="text-center">Your Contacts</h4>
+                                <h4 class="text-center">Recent Chats</h4>
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Name</th>
-                                            <th scope="col">Number</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr
-                                            v-for="(user,
-                                            index) in orderUsers"
+                                            v-for="(message,
+                                            index) in messages"
                                             :key="index"
                                         >
                                             <th scope="row">{{ index + 1 }}</th>
-                                            <td scope="row">
-                                                <a
-                                                    :href="
-                                                        'dashboard/messages/user/' +
-                                                            user.id
-                                                    "
-                                                >
-                                                    {{ user.first_name }}
-                                                    {{ user.last_name }}
-                                                </a>
-                                            </td>
-                                            <td scope="row">+{{ user.phone }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col">
-                                <h4 class="text-center">Your Groups</h4>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Title</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr
-                                            v-for="(group,
-                                            index) in orderGroups"
-                                            :key="index"
-                                        >
-                                            <th scope="row">{{ index + 1 }}</th>
-                                            <td scope="row">
-                                                <div>
-                                                    <a
-                                                        :href="
-                                                        'dashboard/messages/group/' +
-                                                            group.id
-                                                    "
-                                                    >{{ group.title }}</a>
+                                            <td scope="row" v-if="message.to_id['_'] == 'peerUser'">
+                                                <div v-for="(user, index) in users" :key="index">
+                                                    <div v-if="message.from_id == current_user_id">
+                                                        <div
+                                                            v-if="message.to_id.user_id == user.id"
+                                                        >
+                                                            <div v-if="user.first_name != null">
+                                                                <a
+                                                                    :href="'dashboard/messages/user/' + user.id"
+                                                                >{{ user.first_name }} {{ user.last_name }}</a>
+                                                            </div>
+                                                            <div v-else>
+                                                                <p>Deleted Account</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        v-if="message.to_id.user_id == current_user_id"
+                                                    >
+                                                        <div v-if="message.from_id == user.id">
+                                                            <div v-if="user.first_name != null">
+                                                                <a
+                                                                    :href="'dashboard/messages/user/' + user.id"
+                                                                >{{ user.first_name }} {{ user.last_name }}</a>
+                                                            </div>
+                                                            <div v-else>
+                                                                <p>Deleted Account</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col">
-                                <h4 class="text-center">Your Channels</h4>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Title</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr
-                                            v-for="(channel,
-                                            index) in orderChannels"
-                                            :key="index"
-                                        >
-                                            <th scope="row">{{ index + 1 }}</th>
-                                            <td scope="row">
-                                                <div>
-                                                    <a
-                                                        :href="
-                                                        'dashboard/messages/channel/' +
-                                                            channel.id
-                                                    "
-                                                    >{{ channel.title }}</a>
+                                            <td
+                                                scope="row"
+                                                v-else-if="message.to_id['_'] == 'peerChat'"
+                                            >
+                                                <div v-for="(chat, index) in chats" :key="index">
+                                                    <div v-if="message.to_id.chat_id == chat.id">
+                                                        <a
+                                                            :href="'dashboard/messages/group/' + chat.id"
+                                                        >{{ chat.title }}</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td
+                                                scope="row"
+                                                v-else-if="message.to_id['_'] == 'peerChannel'"
+                                            >
+                                                <div v-for="(chat, index) in chats" :key="index">
+                                                    <div v-if="message.to_id.channel_id == chat.id">
+                                                        <a
+                                                            :href="'dashboard/messages/channel/' + chat.id"
+                                                        >{{ chat.title }}</a>
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
@@ -161,7 +144,7 @@
 
 <script>
 export default {
-    props: ["users", "groups", "channels"],
+    props: ["messages", "chats", "users", "current_user_id"],
     data() {
         return {
             csrf: document
@@ -169,17 +152,6 @@ export default {
                 .getAttribute("content"),
             location: location.origin,
         };
-    },
-    computed: {
-        orderUsers() {
-            return _.orderBy(this.users, "first_name", "asc");
-        },
-        orderGroups() {
-            return _.orderBy(this.groups, "title", "asc");
-        },
-        orderChannels() {
-            return _.orderBy(this.channels, "title", "asc");
-        },
     },
 };
 </script>
