@@ -107,12 +107,21 @@ class DashboardController extends Controller
         return redirect()->back();
     }
 
+    public function channel()
+    {
+        //  get the first name of the current logged in user
+        $current_user_first_name = MadelineProto::fullGetSelf();
+        $current_user_first_name = $current_user_first_name->first_name;
+
+        return view('create_channel', compact('current_user_first_name'));
+    }
+
     public function createChannel(Request $request)
     {
         //  create a new channel with channel title and about
         MadelineProto::getClient()->channels->createChannel(['broadcast' => true, 'title' => $request->title, 'about' => $request->about]);
 
-        return redirect()->back();
+        return redirect()->intended('/dashboard');
     }
 
     public function showChannelMessages($channel_id)
@@ -149,5 +158,18 @@ class DashboardController extends Controller
         MadelineProto::getClient()->messages->sendMessage(['peer' => "channel#$channel_id", 'message' => $request->message]);
 
         return redirect()->back();
+    }
+
+    public function showContacts()
+    {
+        //  get all the user contacts registered on telegram of current logged in user
+        $get_contacts = MadelineProto::getClient()->contacts->getContacts();
+        $users = json_encode($get_contacts['users']);
+
+        //  get the first name of the current logged in user
+        $current_user_first_name = MadelineProto::fullGetSelf();
+        $current_user_first_name = $current_user_first_name->first_name;
+
+        return view('contacts', compact('users', 'current_user_first_name'));
     }
 }
