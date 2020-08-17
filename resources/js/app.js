@@ -28,6 +28,11 @@ Vue.component("dashboard", require("./components/Dashboard.vue").default);
 Vue.component("users", require("./components/Users.vue").default);
 Vue.component("groups", require("./components/Groups.vue").default);
 Vue.component("channels", require("./components/Channels.vue").default);
+Vue.component("contacts", require("./components/Contacts.vue").default);
+Vue.component(
+    "create-channel",
+    require("./components/CreateChannel.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -36,5 +41,5 @@ Vue.component("channels", require("./components/Channels.vue").default);
  */
 
 const app = new Vue({
-    el: "#app",
+    el: "#app"
 });

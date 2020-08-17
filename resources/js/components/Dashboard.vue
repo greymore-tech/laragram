@@ -9,51 +9,16 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <h4 class="text-center">Create New Channel</h4>
-                                <form
-                                    method="POST"
-                                    :action="
-                                                location +
-                                                    '/dashboard/channel/create'
-                                            "
-                                >
-                                    <input type="hidden" name="_token" :value="csrf" />
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <input
-                                                    type="text"
-                                                    class="form-control"
-                                                    name="title"
-                                                    placeholder="Write channel title..."
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <textarea
-                                                    type="text"
-                                                    class="form-control"
-                                                    name="about"
-                                                    placeholder="Write channel description..."
-                                                    rows="3"
-                                                ></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <button
-                                                    type="submit"
-                                                    class="btn btn-primary btn-block"
-                                                >Create Channel</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                <a
+                                    :href="'dashboard/channel'"
+                                    class="btn btn-primary btn-block"
+                                >Create Channel</a>
+                            </div>
+                            <div class="col">
+                                <a
+                                    :href="'dashboard/contacts'"
+                                    class="btn btn-primary btn-block"
+                                >Contacts</a>
                             </div>
                         </div>
                         <hr />
