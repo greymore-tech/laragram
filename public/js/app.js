@@ -63043,7 +63043,7 @@ var render = function() {
                       staticClass: "btn btn-primary btn-block",
                       attrs: { href: "dashboard/contacts" }
                     },
-                    [_vm._v("Contacts")]
+                    [_vm._v("Start New Chat")]
                   )
                 ])
               ]),
