@@ -18,7 +18,7 @@
                                 <a
                                     :href="'dashboard/contacts'"
                                     class="btn btn-primary btn-block"
-                                >Contacts</a>
+                                >Start New Chat</a>
                             </div>
                         </div>
                         <hr />
