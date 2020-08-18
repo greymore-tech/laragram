@@ -118,7 +118,31 @@ export default {
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
             location: location.origin,
+            newMessages: this.messages,
         };
+    },
+    created() {
+        var interval;
+
+        this.fetchChannelsMessages();
+        interval = setInterval(() => {
+            this.fetchChannelsMessages();
+        }, 1000);
+
+        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+            clearInterval(interval);
+        }
+    },
+    methods: {
+        fetchChannelsMessages() {
+            fetch(
+                this.location + "/api/channel/messages/" + this.channel_info.id
+            )
+                .then((res) => res.json())
+                .then((res) => {
+                    this.newMessages = res.data;
+                });
+        },
     },
     filters: {
         ago(date) {
@@ -127,7 +151,7 @@ export default {
     },
     computed: {
         orderMessages() {
-            return _.orderBy(this.messages, "date", "asc");
+            return _.orderBy(this.newMessages, "date", "asc");
         },
     },
 };

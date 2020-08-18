@@ -40,7 +40,7 @@
                                                         <div class="col">
                                                             <div
                                                                 v-for="(user,
-                                                                index) in users"
+                                                                index) in newUsers"
                                                                 :key="index"
                                                             >
                                                                 <div
@@ -139,7 +139,38 @@ export default {
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
             location: location.origin,
+            newMessages: this.messages,
+            newUsers: this.users,
         };
+    },
+    created() {
+        var interval;
+
+        this.fetchGroupsMessages();
+        this.fetchGroupsUsers();
+        interval = setInterval(() => {
+            this.fetchGroupsMessages();
+        }, 1000);
+
+        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+            clearInterval(interval);
+        }
+    },
+    methods: {
+        fetchGroupsMessages() {
+            fetch(this.location + "/api/group/messages/" + this.group_info.id)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.newMessages = res.data;
+                });
+        },
+        fetchGroupsUsers() {
+            fetch(this.location + "/api/group/" + this.group_info.id)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.newUsers = res.data;
+                });
+        },
     },
     filters: {
         ago(date) {
@@ -148,7 +179,7 @@ export default {
     },
     computed: {
         orderMessages() {
-            return _.orderBy(this.messages, "date", "asc");
+            return _.orderBy(this.newMessages, "date", "asc");
         },
     },
 };

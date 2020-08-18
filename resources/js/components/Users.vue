@@ -40,7 +40,7 @@
                                                         <div class="col">
                                                             <div
                                                                 v-for="(user,
-                                                                index) in users"
+                                                                index) in newUsers"
                                                                 :key="index"
                                                             >
                                                                 <div
@@ -139,13 +139,44 @@ export default {
         "other_user_id",
         "other_user_info",
     ],
+    created() {
+        var interval;
+
+        this.fetchUsersMessages();
+        this.fetchUsers();
+        interval = setInterval(() => {
+            this.fetchUsersMessages();
+        }, 1000);
+
+        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+            clearInterval(interval);
+        }
+    },
     data() {
         return {
             csrf: document
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
             location: location.origin,
+            newMessages: this.messages,
+            newUsers: this.users,
         };
+    },
+    methods: {
+        fetchUsersMessages() {
+            fetch(this.location + "/api/user/messages/" + this.other_user_id)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.newMessages = res.data;
+                });
+        },
+        fetchUsers() {
+            fetch(this.location + "/api/user/" + this.other_user_id)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.newUsers = res.data;
+                });
+        },
     },
     filters: {
         ago(date) {
@@ -154,7 +185,7 @@ export default {
     },
     computed: {
         orderMessages() {
-            return _.orderBy(this.messages, "date", "asc");
+            return _.orderBy(this.newMessages, "date", "asc");
         },
     },
 };
