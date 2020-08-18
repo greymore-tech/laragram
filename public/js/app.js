@@ -2045,18 +2045,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 $(document).ready(function () {
   var card_scroll_bottom = document.getElementById("card-scroll-bottom");
-  card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight;
+  card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight; // var interval;
+  // if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+  //     clearInterval(interval);
+  // }
 });
 
 
 Vue.directive("linkified", vue_linkify__WEBPACK_IMPORTED_MODULE_1___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // props: ["channel_info", "current_user_id"],
   props: ["messages", "channel_info", "current_user_id"],
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
-      location: location.origin
+      location: location.origin,
+      newMessages: this.messages
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    var interval;
+    this.fetchChannelsMessages();
+    interval = setInterval(function () {
+      _this.fetchChannelsMessages();
+    }, 1000);
+
+    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+      clearInterval(interval);
+    }
+  },
+  methods: {
+    fetchChannelsMessages: function fetchChannelsMessages() {
+      var _this2 = this;
+
+      fetch(this.location + "/api/channel/messages/" + this.channel_info.id).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        // console.log(res.data);
+        // console.log(this.$user_id);
+        _this2.newMessages = res.data;
+      });
+    }
   },
   filters: {
     ago: function ago(date) {
@@ -2070,7 +2101,7 @@ Vue.directive("linkified", vue_linkify__WEBPACK_IMPORTED_MODULE_1___default.a);
   },
   computed: {
     orderMessages: function orderMessages() {
-      return _.orderBy(this.messages, "date", "asc");
+      return _.orderBy(this.newMessages, "date", "asc");
     }
   }
 });
@@ -2528,20 +2559,21 @@ __webpack_require__.r(__webpack_exports__);
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
       location: location.origin
     };
-  },
-  computed: {// orderUserGroupsChannels() {
-    //     return _.orderBy(this.users, "first_name", "asc");
-    // },
-    // orderUsers() {
-    //     return _.orderBy(this.users, "first_name", "asc");
-    // },
-    // orderGroups() {
-    //     return _.orderBy(this.groups, "title", "asc");
-    // },
-    // orderChannels() {
-    //     return _.orderBy(this.channels, "title", "asc");
-    // },
-  }
+  } // computed: {
+  //     // orderUserGroupsChannels() {
+  //     //     return _.orderBy(this.users, "first_name", "asc");
+  //     // },
+  //     // orderUsers() {
+  //     //     return _.orderBy(this.users, "first_name", "asc");
+  //     // },
+  //     // orderGroups() {
+  //     //     return _.orderBy(this.groups, "title", "asc");
+  //     // },
+  //     // orderChannels() {
+  //     //     return _.orderBy(this.channels, "title", "asc");
+  //     // },
+  // },
+
 });
 
 /***/ }),
@@ -2691,16 +2723,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 $(document).ready(function () {
   var card_scroll_bottom = document.getElementById("card-scroll-bottom");
-  card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight;
+  card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight; // var interval;
+  // if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+  //     clearInterval(interval);
+  // }
 });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // props: ["group_info", "current_user_id"],
   props: ["messages", "users", "group_info", "current_user_id"],
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
-      location: location.origin
+      location: location.origin,
+      newMessages: this.messages,
+      newUsers: this.users
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    var interval;
+    this.fetchGroupsMessages();
+    this.fetchGroupsUsers();
+    interval = setInterval(function () {
+      _this.fetchGroupsMessages();
+    }, 1000);
+
+    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+      clearInterval(interval);
+    }
+  },
+  methods: {
+    fetchGroupsMessages: function fetchGroupsMessages() {
+      var _this2 = this;
+
+      fetch(this.location + "/api/group/messages/" + this.group_info.id).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        // console.log(res.data);
+        // console.log(this.$user_id);
+        _this2.newMessages = res.data;
+      });
+    },
+    fetchGroupsUsers: function fetchGroupsUsers() {
+      var _this3 = this;
+
+      fetch(this.location + "/api/group/" + this.group_info.id).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        // console.log(res.data);
+        // console.log(this.$user_id);
+        _this3.newUsers = res.data; // var card_scroll_bottom = document.getElementById(
+        //     "card-scroll-bottom"
+        // );
+        // card_scroll_bottom.scrollTop =
+        //     card_scroll_bottom.scrollHeight;
+      });
+    }
   },
   filters: {
     ago: function ago(date) {
@@ -2709,7 +2789,7 @@ $(document).ready(function () {
   },
   computed: {
     orderMessages: function orderMessages() {
-      return _.orderBy(this.messages, "date", "asc");
+      return _.orderBy(this.newMessages, "date", "asc");
     }
   }
 });
@@ -2994,16 +3074,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 $(document).ready(function () {
   var card_scroll_bottom = document.getElementById("card-scroll-bottom");
-  card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight;
+  card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight; // var interval;
+  // if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+  //     clearInterval(interval);
+  // }
 });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["messages", "users", "current_user_id", "other_user_id", "other_user_info"],
+  created: function created() {
+    var _this = this;
+
+    var interval;
+    this.fetchUsersMessages();
+    this.fetchUsers();
+    interval = setInterval(function () {
+      _this.fetchUsersMessages();
+    }, 1000);
+
+    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+      clearInterval(interval);
+    }
+  },
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
-      location: location.origin
+      location: location.origin,
+      newMessages: this.messages,
+      newUsers: this.users
     };
+  },
+  methods: {
+    fetchUsersMessages: function fetchUsersMessages() {
+      var _this2 = this;
+
+      fetch(this.location + "/api/user/messages/" + this.other_user_id).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        // console.log(res.data);
+        // console.log(this.$user_id);
+        _this2.newMessages = res.data;
+      });
+    },
+    fetchUsers: function fetchUsers() {
+      var _this3 = this;
+
+      fetch(this.location + "/api/user/" + this.other_user_id).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        // console.log(res.data);
+        // console.log(this.$user_id);
+        _this3.newUsers = res.data; // var card_scroll_bottom = document.getElementById(
+        //     "card-scroll-bottom"
+        // );
+        // card_scroll_bottom.scrollTop =
+        //     card_scroll_bottom.scrollHeight;
+      });
+    }
   },
   filters: {
     ago: function ago(date) {
@@ -3017,7 +3144,7 @@ $(document).ready(function () {
   },
   computed: {
     orderMessages: function orderMessages() {
-      return _.orderBy(this.messages, "date", "asc");
+      return _.orderBy(this.newMessages, "date", "asc");
     }
   }
 });
@@ -63087,7 +63214,7 @@ var render = function() {
                                             _c(
                                               "div",
                                               { staticClass: "col" },
-                                              _vm._l(_vm.users, function(
+                                              _vm._l(_vm.newUsers, function(
                                                 user,
                                                 index
                                               ) {
@@ -63543,7 +63670,7 @@ var render = function() {
                                             _c(
                                               "div",
                                               { staticClass: "col" },
-                                              _vm._l(_vm.users, function(
+                                              _vm._l(_vm.newUsers, function(
                                                 user,
                                                 index
                                               ) {
