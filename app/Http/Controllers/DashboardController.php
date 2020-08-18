@@ -62,14 +62,6 @@ class DashboardController extends Controller
         return view('users', compact('messages', 'users', 'current_user_id', 'other_user_id', 'other_user_info', 'current_user_first_name'));
     }
 
-    public function sendUserMessage(Request $request, $other_user_id)
-    {
-        //  send the message to user based on user id
-        MadelineProto::getClient()->messages->sendMessage(['peer' => $other_user_id, 'message' => $request->message]);
-
-        return redirect()->back();
-    }
-
     public function showGroupMessages($group_id)
     {
         //  get current time
@@ -97,14 +89,6 @@ class DashboardController extends Controller
         $group_info = json_encode($get_info['Chat']);
 
         return view('groups', compact('messages', 'users', 'group_info', 'current_user_id', 'current_user_first_name'));
-    }
-
-    public function sendGroupMessage(Request $request, $group_id)
-    {
-        //  send the message to group based on group id
-        MadelineProto::getClient()->messages->sendMessage(['peer' => "chat#$group_id", 'message' => $request->message]);
-
-        return redirect()->back();
     }
 
     public function channel()
@@ -150,14 +134,6 @@ class DashboardController extends Controller
         $channel_info = json_encode($get_info['Chat']);
 
         return view('channels', compact('messages', 'channel_info', 'current_user_id', 'current_user_first_name'));
-    }
-
-    public function sendChannelMessage(Request $request, $channel_id)
-    {
-        //  send the message to channel based on channel id
-        MadelineProto::getClient()->messages->sendMessage(['peer' => "channel#$channel_id", 'message' => $request->message]);
-
-        return redirect()->back();
     }
 
     public function showContacts()

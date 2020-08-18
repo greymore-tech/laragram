@@ -85,15 +85,7 @@
                         </div>
                         <div class="row">
                             <div class="col mt-4">
-                                <form
-                                    method="POST"
-                                    :action="
-                                        location +
-                                            '/dashboard/message/group/' +
-                                            group_info.id +
-                                            '/send'
-                                    "
-                                >
+                                <form @submit.prevent="sendMessage">
                                     <input type="hidden" name="_token" :value="csrf" />
                                     <div class="row">
                                         <div class="col-9">
@@ -101,7 +93,7 @@
                                                 <input
                                                     type="text"
                                                     class="form-control"
-                                                    name="message"
+                                                    v-model="messageToSend"
                                                     placeholder="Write your message..."
                                                 />
                                             </div>
@@ -139,6 +131,7 @@ export default {
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
             location: location.origin,
+            messageToSend: "",
             newMessages: this.messages,
             newUsers: this.users,
         };
@@ -170,6 +163,25 @@ export default {
                 .then((res) => {
                     this.newUsers = res.data;
                 });
+        },
+        sendMessage() {
+            var vm = this;
+            axios
+                .post(
+                    this.location +
+                        "/api/dashboard/message/group/" +
+                        this.group_info.id +
+                        "/send",
+                    {
+                        messageToSend: this.messageToSend,
+                    }
+                )
+                .then(function (response) {
+                    if (response.status === 200) {
+                        vm.messageToSend = "";
+                    }
+                })
+                .catch((error) => console.log(error));
         },
     },
     filters: {

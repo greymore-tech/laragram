@@ -2043,6 +2043,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 $(document).ready(function () {
   var card_scroll_bottom = document.getElementById("card-scroll-bottom");
   card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight; // var interval;
@@ -2060,6 +2081,7 @@ Vue.directive("linkified", vue_linkify__WEBPACK_IMPORTED_MODULE_1___default.a);
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
       location: location.origin,
+      messageToSend: "",
       newMessages: this.messages
     };
   },
@@ -2086,6 +2108,20 @@ Vue.directive("linkified", vue_linkify__WEBPACK_IMPORTED_MODULE_1___default.a);
         // console.log(res.data);
         // console.log(this.$user_id);
         _this2.newMessages = res.data;
+      });
+    },
+    sendMessage: function sendMessage() {
+      var vm = this;
+      axios.post(this.location + "/api/dashboard/message/channel/" + this.channel_info.id + "/send", {
+        messageToSend: this.messageToSend
+      }).then(function (response) {
+        if (response.status === 200) {
+          //reload posts
+          // console.log(response.data);
+          vm.messageToSend = "";
+        }
+      })["catch"](function (error) {
+        return console.log(error);
       });
     }
   },
@@ -2721,6 +2757,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 $(document).ready(function () {
   var card_scroll_bottom = document.getElementById("card-scroll-bottom");
   card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight; // var interval;
@@ -2736,6 +2793,7 @@ $(document).ready(function () {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
       location: location.origin,
+      messageToSend: "",
       newMessages: this.messages,
       newUsers: this.users
     };
@@ -2779,6 +2837,20 @@ $(document).ready(function () {
         // );
         // card_scroll_bottom.scrollTop =
         //     card_scroll_bottom.scrollHeight;
+      });
+    },
+    sendMessage: function sendMessage() {
+      var vm = this;
+      axios.post(this.location + "/api/dashboard/message/group/" + this.group_info.id + "/send", {
+        messageToSend: this.messageToSend
+      }).then(function (response) {
+        if (response.status === 200) {
+          //reload posts
+          // console.log(response.data);
+          vm.messageToSend = "";
+        }
+      })["catch"](function (error) {
+        return console.log(error);
       });
     }
   },
@@ -3072,6 +3144,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 $(document).ready(function () {
   var card_scroll_bottom = document.getElementById("card-scroll-bottom");
   card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight; // var interval;
@@ -3100,6 +3193,7 @@ $(document).ready(function () {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
       location: location.origin,
+      messageToSend: "",
       newMessages: this.messages,
       newUsers: this.users
     };
@@ -3129,6 +3223,20 @@ $(document).ready(function () {
         // );
         // card_scroll_bottom.scrollTop =
         //     card_scroll_bottom.scrollHeight;
+      });
+    },
+    sendMessage: function sendMessage() {
+      var vm = this;
+      axios.post(this.location + "/api/dashboard/message/user/" + this.other_user_id + "/send", {
+        messageToSend: this.messageToSend
+      }).then(function (response) {
+        if (response.status === 200) {
+          //reload posts
+          // console.log(response.data);
+          vm.messageToSend = "";
+        }
+      })["catch"](function (error) {
+        return console.log(error);
       });
     }
   },
@@ -62533,13 +62641,11 @@ var render = function() {
                   _c(
                     "form",
                     {
-                      attrs: {
-                        method: "POST",
-                        action:
-                          _vm.location +
-                          "/dashboard/message/channel/" +
-                          _vm.channel_info.id +
-                          "/send"
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.sendMessage($event)
+                        }
                       }
                     },
                     [
@@ -62548,7 +62654,38 @@ var render = function() {
                         domProps: { value: _vm.csrf }
                       }),
                       _vm._v(" "),
-                      _vm._m(0)
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-9" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.messageToSend,
+                                  expression: "messageToSend"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                placeholder: "Write your message..."
+                              },
+                              domProps: { value: _vm.messageToSend },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.messageToSend = $event.target.value
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(0)
+                      ])
                     ]
                   )
                 ])
@@ -62565,30 +62702,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-9" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "message",
-              placeholder: "Write your message..."
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-block",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("Send")]
-        )
-      ])
+    return _c("div", { staticClass: "col" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary btn-block", attrs: { type: "submit" } },
+        [_vm._v("Send")]
+      )
     ])
   }
 ]
@@ -63284,13 +63403,11 @@ var render = function() {
                   _c(
                     "form",
                     {
-                      attrs: {
-                        method: "POST",
-                        action:
-                          _vm.location +
-                          "/dashboard/message/group/" +
-                          _vm.group_info.id +
-                          "/send"
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.sendMessage($event)
+                        }
                       }
                     },
                     [
@@ -63299,7 +63416,38 @@ var render = function() {
                         domProps: { value: _vm.csrf }
                       }),
                       _vm._v(" "),
-                      _vm._m(0)
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-9" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.messageToSend,
+                                  expression: "messageToSend"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                placeholder: "Write your message..."
+                              },
+                              domProps: { value: _vm.messageToSend },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.messageToSend = $event.target.value
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(0)
+                      ])
                     ]
                   )
                 ])
@@ -63316,30 +63464,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-9" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "message",
-              placeholder: "Write your message..."
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-block",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("Send")]
-        )
-      ])
+    return _c("div", { staticClass: "col" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary btn-block", attrs: { type: "submit" } },
+        [_vm._v("Send")]
+      )
     ])
   }
 ]
@@ -63740,13 +63870,11 @@ var render = function() {
                   _c(
                     "form",
                     {
-                      attrs: {
-                        method: "POST",
-                        action:
-                          _vm.location +
-                          "/dashboard/message/user/" +
-                          _vm.other_user_id +
-                          "/send"
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.sendMessage($event)
+                        }
                       }
                     },
                     [
@@ -63755,7 +63883,38 @@ var render = function() {
                         domProps: { value: _vm.csrf }
                       }),
                       _vm._v(" "),
-                      _vm._m(0)
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-9" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.messageToSend,
+                                  expression: "messageToSend"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                placeholder: "Write your message..."
+                              },
+                              domProps: { value: _vm.messageToSend },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.messageToSend = $event.target.value
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(0)
+                      ])
                     ]
                   )
                 ])
@@ -63772,30 +63931,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-9" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "message",
-              placeholder: "Write your message..."
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-block",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("Send")]
-        )
-      ])
+    return _c("div", { staticClass: "col" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary btn-block", attrs: { type: "submit" } },
+        [_vm._v("Send")]
+      )
     ])
   }
 ]

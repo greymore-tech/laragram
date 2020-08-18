@@ -43,6 +43,12 @@ class ChatController extends Controller
         return ChatResource::collection($users);
     }
 
+    public function sendUserMessage(Request $request, $other_user_id)
+    {
+        //  send the message to user based on user id
+        MadelineProto::getClient()->messages->sendMessage(['peer' => $other_user_id, 'message' => $request->messageToSend]);
+    }
+
     public function fetchGroupsMessages($group_id)
     {
         //  get current time
@@ -77,6 +83,12 @@ class ChatController extends Controller
         return ChatResource::collection($users);
     }
 
+    public function sendGroupMessage(Request $request, $group_id)
+    {
+        //  send the message to group based on group id
+        MadelineProto::getClient()->messages->sendMessage(['peer' => "chat#$group_id", 'message' => $request->messageToSend]);
+    }
+
     public function fetchChannelsMessages($channel_id)
     {
         //  get current time
@@ -92,5 +104,11 @@ class ChatController extends Controller
         $messages = $history['messages'];
 
         return ChatResource::collection($messages);
+    }
+
+    public function sendChannelMessage(Request $request, $channel_id)
+    {
+        //  send the message to channel based on channel id
+        MadelineProto::getClient()->messages->sendMessage(['peer' => "channel#$channel_id", 'message' => $request->messageToSend]);
     }
 }

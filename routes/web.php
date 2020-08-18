@@ -27,13 +27,10 @@ Route::get('logout', 'AuthController@logout')->name('auth.logout')->middleware('
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 //  User Messages Routes
 Route::get('dashboard/messages/user/{other_user_id}', 'DashboardController@showUserMessages')->name('dashboard.user.messages');
-Route::post('dashboard/message/user/{other_user_id}/send', 'DashboardController@sendUserMessage')->name('dashboard.user.message.send');
 //  Group Messages Routes
 Route::get('dashboard/messages/group/{group_id}', 'DashboardController@showGroupMessages')->name('dashboard.group.messages');
-Route::post('dashboard/message/group/{group_id}/send', 'DashboardController@sendGroupMessage')->name('dashboard.group.message.send');
 //  Channel Messages Routes
 Route::get('dashboard/messages/channel/{channel_id}', 'DashboardController@showChannelMessages')->name('dashboard.channel.messages');
-Route::post('dashboard/message/channel/{channel_id}/send', 'DashboardController@sendChannelMessage')->name('dashboard.channel.message.send');
 //  Create Channel Routes
 Route::get('dashboard/channel', 'DashboardController@channel')->name('dashboard.channel');
 Route::post('dashboard/channel/create', 'DashboardController@createChannel')->name('dashboard.channel.create');
