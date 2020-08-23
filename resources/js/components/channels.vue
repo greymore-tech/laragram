@@ -101,6 +101,7 @@ import moment from "moment";
 import linkify from "vue-linkify";
 
 Vue.directive("linkified", linkify);
+Vue.prototype.interval;
 
 export default {
     props: ["messages", "channel_info", "current_user_id"],
@@ -115,15 +116,24 @@ export default {
         };
     },
     created() {
-        var interval;
-
         this.fetchChannelsMessages();
-        interval = setInterval(() => {
+        this.interval = setInterval(() => {
             this.fetchChannelsMessages();
         }, 1000);
 
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-            clearInterval(interval);
+            clearInterval(this.interval);
+        }
+    },
+    mounted() {
+        window.addEventListener("load", () => {
+            this.interval = setInterval(() => {
+                this.fetchChannelsMessages();
+            }, 1000);
+        });
+
+        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+            clearInterval(this.interval);
         }
     },
     methods: {

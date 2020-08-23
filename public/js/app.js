@@ -2074,6 +2074,7 @@ $(document).ready(function () {
 
 
 Vue.directive("linkified", vue_linkify__WEBPACK_IMPORTED_MODULE_1___default.a);
+Vue.prototype.interval;
 /* harmony default export */ __webpack_exports__["default"] = ({
   // props: ["channel_info", "current_user_id"],
   props: ["messages", "channel_info", "current_user_id"],
@@ -2088,26 +2089,50 @@ Vue.directive("linkified", vue_linkify__WEBPACK_IMPORTED_MODULE_1___default.a);
   created: function created() {
     var _this = this;
 
-    var interval;
+    // var interval;
     this.fetchChannelsMessages();
-    interval = setInterval(function () {
+    this.interval = setInterval(function () {
       _this.fetchChannelsMessages();
     }, 1000);
 
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-      clearInterval(interval);
+      clearInterval(this.interval);
+    } // var interval;
+    // window.addEventListener("load", () => {
+    //     this.fetchChannelsMessages();
+    //     interval = setInterval(() => {
+    //         this.fetchChannelsMessages();
+    //     }, 1000);
+    // });
+    // if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+    //     clearInterval(interval);
+    // }
+
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    // var interval;
+    window.addEventListener("load", function () {
+      _this2.interval = setInterval(function () {
+        _this2.fetchChannelsMessages();
+      }, 1000);
+    });
+
+    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+      clearInterval(this.interval);
     }
   },
   methods: {
     fetchChannelsMessages: function fetchChannelsMessages() {
-      var _this2 = this;
+      var _this3 = this;
 
       fetch(this.location + "/api/channel/messages/" + this.channel_info.id).then(function (res) {
         return res.json();
       }).then(function (res) {
         // console.log(res.data);
         // console.log(this.$user_id);
-        _this2.newMessages = res.data;
+        _this3.newMessages = res.data;
       });
     },
     sendMessage: function sendMessage() {
@@ -2786,6 +2811,7 @@ $(document).ready(function () {
   // }
 });
 
+Vue.prototype.interval;
 /* harmony default export */ __webpack_exports__["default"] = ({
   // props: ["group_info", "current_user_id"],
   props: ["messages", "users", "group_info", "current_user_id"],
@@ -2801,38 +2827,65 @@ $(document).ready(function () {
   created: function created() {
     var _this = this;
 
-    var interval;
+    // var interval;
     this.fetchGroupsMessages();
     this.fetchGroupsUsers();
-    interval = setInterval(function () {
+    this.interval = setInterval(function () {
       _this.fetchGroupsMessages();
     }, 1000);
 
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-      clearInterval(interval);
+      clearInterval(this.interval);
+    } // var interval;
+    // window.addEventListener("load", () => {
+    //     this.fetchGroupsMessages();
+    //     this.fetchGroupsUsers();
+    //     interval = setInterval(() => {
+    //         this.fetchGroupsMessages();
+    //     }, 1500);
+    // });
+    // if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+    //     clearInterval(interval);
+    // }
+
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    // var interval;
+    window.addEventListener("load", function () {
+      //     this.fetchGroupsMessages();
+      //     this.fetchGroupsUsers();
+      _this2.interval = setInterval(function () {
+        _this2.fetchGroupsMessages();
+      }, 1000);
+    });
+
+    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+      clearInterval(this.interval);
     }
   },
   methods: {
     fetchGroupsMessages: function fetchGroupsMessages() {
-      var _this2 = this;
+      var _this3 = this;
 
       fetch(this.location + "/api/group/messages/" + this.group_info.id).then(function (res) {
         return res.json();
       }).then(function (res) {
         // console.log(res.data);
         // console.log(this.$user_id);
-        _this2.newMessages = res.data;
+        _this3.newMessages = res.data;
       });
     },
     fetchGroupsUsers: function fetchGroupsUsers() {
-      var _this3 = this;
+      var _this4 = this;
 
       fetch(this.location + "/api/group/" + this.group_info.id).then(function (res) {
         return res.json();
       }).then(function (res) {
         // console.log(res.data);
         // console.log(this.$user_id);
-        _this3.newUsers = res.data; // var card_scroll_bottom = document.getElementById(
+        _this4.newUsers = res.data; // var card_scroll_bottom = document.getElementById(
         //     "card-scroll-bottom"
         // );
         // card_scroll_bottom.scrollTop =
@@ -3168,27 +3221,89 @@ __webpack_require__.r(__webpack_exports__);
 $(document).ready(function () {
   var card_scroll_bottom = document.getElementById("card-scroll-bottom");
   card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight; // var interval;
+  // Vue.prototype.interval = "";
   // if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
   //     clearInterval(interval);
   // }
 });
 
+Vue.prototype.interval;
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["messages", "users", "current_user_id", "other_user_id", "other_user_info"],
   created: function created() {
     var _this = this;
 
-    var interval;
-    this.fetchUsersMessages();
-    this.fetchUsers();
-    interval = setInterval(function () {
+    // var interval;
+    // this.fetchUsersMessages();
+    // this.fetchUsers();
+    // let interval = setInterval(() => {
+    //     this.fetchUsersMessages();
+    // }, 1000);
+    // if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+    //     clearInterval(this.interval);
+    // }
+    // console.log(this.interval);
+    // var interval;
+    window.addEventListener("load", function () {
       _this.fetchUsersMessages();
-    }, 1000);
+
+      _this.fetchUsers();
+
+      _this.interval = setInterval(function () {
+        _this.fetchUsersMessages();
+      }, 1000);
+    });
 
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-      clearInterval(interval);
+      clearInterval(this.interval);
+    } // window.addEventListener("unload", () => {
+    //     // if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+    //     clearInterval(this.interval);
+    //     // }
+    // });
+
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    window.addEventListener("load", function () {
+      // this.fetchUsersMessages();
+      // this.fetchUsers();
+      _this2.interval = setInterval(function () {
+        _this2.fetchUsersMessages();
+      }, 1000);
+    });
+
+    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+      clearInterval(this.interval);
     }
   },
+  // updated() {
+  //     // var interval;
+  //     // console.log(this.interval);
+  //     // window.addEventListener("beforeunload", () => {
+  //     //     // if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+  //     //     clearInterval(interval);
+  //     //     // }
+  //     // });
+  //     // this.fetchUsersMessages();
+  //     // this.fetchUsers();
+  //     window.addEventListener("load", () => {
+  //         this.fetchUsersMessages();
+  //         this.fetchUsers();
+  //         this.interval = setInterval(() => {
+  //             this.fetchUsersMessages();
+  //         }, 1000);
+  //     });
+  //     // if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+  //     //     clearInterval(this.interval);
+  //     // }
+  //     window.addEventListener("beforeunload", () => {
+  //         // if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+  //         clearInterval(interval);
+  //         // }
+  //     });
+  // },
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
@@ -3200,25 +3315,25 @@ $(document).ready(function () {
   },
   methods: {
     fetchUsersMessages: function fetchUsersMessages() {
-      var _this2 = this;
+      var _this3 = this;
 
       fetch(this.location + "/api/user/messages/" + this.other_user_id).then(function (res) {
         return res.json();
       }).then(function (res) {
         // console.log(res.data);
         // console.log(this.$user_id);
-        _this2.newMessages = res.data;
+        _this3.newMessages = res.data;
       });
     },
     fetchUsers: function fetchUsers() {
-      var _this3 = this;
+      var _this4 = this;
 
       fetch(this.location + "/api/user/" + this.other_user_id).then(function (res) {
         return res.json();
       }).then(function (res) {
         // console.log(res.data);
         // console.log(this.$user_id);
-        _this3.newUsers = res.data; // var card_scroll_bottom = document.getElementById(
+        _this4.newUsers = res.data; // var card_scroll_bottom = document.getElementById(
         //     "card-scroll-bottom"
         // );
         // card_scroll_bottom.scrollTop =

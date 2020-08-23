@@ -123,6 +123,8 @@ $(document).ready(function () {
 
 import moment from "moment";
 
+Vue.prototype.interval;
+
 export default {
     props: ["messages", "users", "group_info", "current_user_id"],
     data() {
@@ -137,16 +139,25 @@ export default {
         };
     },
     created() {
-        var interval;
-
         this.fetchGroupsMessages();
         this.fetchGroupsUsers();
-        interval = setInterval(() => {
+        this.interval = setInterval(() => {
             this.fetchGroupsMessages();
         }, 1000);
 
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-            clearInterval(interval);
+            clearInterval(this.interval);
+        }
+    },
+    mounted() {
+        window.addEventListener("load", () => {
+            this.interval = setInterval(() => {
+                this.fetchGroupsMessages();
+            }, 1000);
+        });
+
+        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+            clearInterval(this.interval);
         }
     },
     methods: {

@@ -123,6 +123,8 @@ $(document).ready(function () {
 
 import moment from "moment";
 
+Vue.prototype.interval;
+
 export default {
     props: [
         "messages",
@@ -132,16 +134,27 @@ export default {
         "other_user_info",
     ],
     created() {
-        var interval;
-
-        this.fetchUsersMessages();
-        this.fetchUsers();
-        interval = setInterval(() => {
+        window.addEventListener("load", () => {
             this.fetchUsersMessages();
-        }, 1000);
+            this.fetchUsers();
+            this.interval = setInterval(() => {
+                this.fetchUsersMessages();
+            }, 1000);
+        });
 
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-            clearInterval(interval);
+            clearInterval(this.interval);
+        }
+    },
+    mounted() {
+        window.addEventListener("load", () => {
+            this.interval = setInterval(() => {
+                this.fetchUsersMessages();
+            }, 1000);
+        });
+
+        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+            clearInterval(this.interval);
         }
     },
     data() {
