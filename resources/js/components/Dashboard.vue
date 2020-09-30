@@ -12,13 +12,22 @@
                                 <a
                                     :href="'dashboard/channel'"
                                     class="btn btn-primary btn-block"
-                                >Create Channel</a>
+                                    >Create Channel</a
+                                >
+                            </div>
+                            <div class="col">
+                                <a
+                                    :href="'dashboard/group'"
+                                    class="btn btn-primary btn-block"
+                                    >Create Group</a
+                                >
                             </div>
                             <div class="col">
                                 <a
                                     :href="'dashboard/contacts'"
                                     class="btn btn-primary btn-block"
-                                >Start New Chat</a>
+                                    >Start New Chat</a
+                                >
                             </div>
                         </div>
                         <hr />
@@ -34,38 +43,99 @@
                                     </thead>
                                     <tbody>
                                         <tr
-                                            v-for="(message,
-                                            index) in messages"
+                                            v-for="(message, index) in messages"
                                             :key="index"
                                         >
                                             <th scope="row">{{ index + 1 }}</th>
-                                            <td scope="row" v-if="message.to_id['_'] == 'peerUser'">
-                                                <div v-for="(user, index) in users" :key="index">
-                                                    <div v-if="message.from_id == current_user_id">
+                                            <td
+                                                scope="row"
+                                                v-if="
+                                                    message.to_id['_'] ==
+                                                    'peerUser'
+                                                "
+                                            >
+                                                <div
+                                                    v-for="(user,
+                                                    index) in users"
+                                                    :key="index"
+                                                >
+                                                    <div
+                                                        v-if="
+                                                            message.from_id ==
+                                                            current_user_id
+                                                        "
+                                                    >
                                                         <div
-                                                            v-if="message.to_id.user_id == user.id"
+                                                            v-if="
+                                                                message.to_id
+                                                                    .user_id ==
+                                                                user.id
+                                                            "
                                                         >
-                                                            <div v-if="user.first_name != null">
+                                                            <div
+                                                                v-if="
+                                                                    user.first_name !=
+                                                                    null
+                                                                "
+                                                            >
                                                                 <a
-                                                                    :href="'dashboard/messages/user/' + user.id"
-                                                                >{{ user.first_name }} {{ user.last_name }}</a>
+                                                                    :href="
+                                                                        'dashboard/messages/user/' +
+                                                                        user.id
+                                                                    "
+                                                                    >{{
+                                                                        user.first_name
+                                                                    }}
+                                                                    {{
+                                                                        user.last_name
+                                                                    }}</a
+                                                                >
                                                             </div>
                                                             <div v-else>
-                                                                <p>Deleted Account</p>
+                                                                <p>
+                                                                    Deleted
+                                                                    Account
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div
-                                                        v-if="message.to_id.user_id == current_user_id"
+                                                        v-if="
+                                                            message.to_id
+                                                                .user_id ==
+                                                            current_user_id
+                                                        "
                                                     >
-                                                        <div v-if="message.from_id == user.id">
-                                                            <div v-if="user.first_name != null">
+                                                        <div
+                                                            v-if="
+                                                                message.from_id ==
+                                                                user.id
+                                                            "
+                                                        >
+                                                            <div
+                                                                v-if="
+                                                                    user.first_name !=
+                                                                    null
+                                                                "
+                                                            >
                                                                 <a
-                                                                    :href="'dashboard/messages/user/' + user.id"
-                                                                >{{ user.first_name }} {{ user.last_name }}</a>
+                                                                    :href="
+                                                                        'dashboard/messages/user/' +
+                                                                        user.id
+                                                                    "
+                                                                    >{{
+                                                                        user.first_name
+                                                                    }}
+                                                                    {{
+                                                                        user.last_name
+                                                                    }}</a
+                                                                >
                                                             </div>
                                                             <div v-else>
-                                                                <p>Deleted Account</p>
+                                                                <p>
+                                                                    Deleted
+                                                                    Account
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -73,25 +143,59 @@
                                             </td>
                                             <td
                                                 scope="row"
-                                                v-else-if="message.to_id['_'] == 'peerChat'"
+                                                v-else-if="
+                                                    message.to_id['_'] ==
+                                                    'peerChat'
+                                                "
                                             >
-                                                <div v-for="(chat, index) in chats" :key="index">
-                                                    <div v-if="message.to_id.chat_id == chat.id">
+                                                <div
+                                                    v-for="(chat,
+                                                    index) in chats"
+                                                    :key="index"
+                                                >
+                                                    <div
+                                                        v-if="
+                                                            message.to_id
+                                                                .chat_id ==
+                                                            chat.id
+                                                        "
+                                                    >
                                                         <a
-                                                            :href="'dashboard/messages/group/' + chat.id"
-                                                        >{{ chat.title }}</a>
+                                                            :href="
+                                                                'dashboard/messages/group/' +
+                                                                chat.id
+                                                            "
+                                                            >{{ chat.title }}</a
+                                                        >
                                                     </div>
                                                 </div>
                                             </td>
                                             <td
                                                 scope="row"
-                                                v-else-if="message.to_id['_'] == 'peerChannel'"
+                                                v-else-if="
+                                                    message.to_id['_'] ==
+                                                    'peerChannel'
+                                                "
                                             >
-                                                <div v-for="(chat, index) in chats" :key="index">
-                                                    <div v-if="message.to_id.channel_id == chat.id">
+                                                <div
+                                                    v-for="(chat,
+                                                    index) in chats"
+                                                    :key="index"
+                                                >
+                                                    <div
+                                                        v-if="
+                                                            message.to_id
+                                                                .channel_id ==
+                                                            chat.id
+                                                        "
+                                                    >
                                                         <a
-                                                            :href="'dashboard/messages/channel/' + chat.id"
-                                                        >{{ chat.title }}</a>
+                                                            :href="
+                                                                'dashboard/messages/channel/' +
+                                                                chat.id
+                                                            "
+                                                            >{{ chat.title }}</a
+                                                        >
                                                     </div>
                                                 </div>
                                             </td>
