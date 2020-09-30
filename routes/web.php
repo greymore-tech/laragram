@@ -34,5 +34,7 @@ Route::get('dashboard/messages/channel/{channel_id}', 'DashboardController@showC
 //  Create Channel Routes
 Route::get('dashboard/channel', 'DashboardController@channel')->name('dashboard.channel');
 Route::post('dashboard/channel/create', 'DashboardController@createChannel')->name('dashboard.channel.create');
+//  Create Group Routes
+Route::get('dashboard/group', 'DashboardController@group')->name('dashboard.group');
 //  Show Contacts Route
 Route::get('dashboard/contacts', 'DashboardController@showContacts')->name('dashboard.contacts');
