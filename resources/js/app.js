@@ -33,6 +33,10 @@ Vue.component(
     "create-channel",
     require("./components/CreateChannel.vue").default
 );
+Vue.component(
+    "create-group",
+    require("./components/CreateGroup.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
