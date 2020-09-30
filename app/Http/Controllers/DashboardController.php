@@ -62,6 +62,18 @@ class DashboardController extends Controller
         return view('users', compact('messages', 'users', 'current_user_id', 'other_user_id', 'other_user_info', 'current_user_first_name'));
     }
 
+    public function group() {
+        //  get all the user contacts registered on telegram of current logged in user
+        $get_contacts = MadelineProto::getClient()->contacts->getContacts();
+        $users = json_encode($get_contacts['users']);
+
+        //  get the first name of the current logged in user
+        $current_user_first_name = MadelineProto::fullGetSelf();
+        $current_user_first_name = $current_user_first_name->first_name;
+
+        return view('create_group', compact('users', 'current_user_first_name'));
+    }
+
     public function showGroupMessages($group_id)
     {
         //  get current time
