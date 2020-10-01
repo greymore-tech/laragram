@@ -6,7 +6,10 @@
                     <div class="card-header text-center pt-3">
                         <h2>Dashboard</h2>
                     </div>
-                    <form method="POST" action="">
+                    <form
+                        method="POST"
+                        :action="location + '/dashboard/group/create'"
+                    >
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -70,6 +73,7 @@
                                                         <input
                                                             class="form-check-input"
                                                             type="checkbox"
+                                                            name="user_id[]"
                                                             id="user-id"
                                                             :value="user.id"
                                                         />
