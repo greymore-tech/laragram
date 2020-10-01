@@ -5,6 +5,15 @@
                 <div class="card">
                     <div class="card-header text-center pt-3">
                         <h2>{{ group_info.title }}</h2>
+                        <p>
+                            <a :href="'/dashboard/group/pin/' + group_info.id"
+                                >PIN</a
+                            >
+                            |
+                            <a :href="'/dashboard/group/unpin/' + group_info.id"
+                                >UNPIN</a
+                            >
+                        </p>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -22,21 +31,27 @@
                                                     current_user_id ==
                                                     message.from_id
                                                         ? 'float-right'
-                                                        : 'float-left'
+                                                        : 'float-left',
                                                 ]"
                                             >
-                                                <div class="card pt-3 pr-4 pl-4">
+                                                <div
+                                                    class="card pt-3 pr-4 pl-4"
+                                                >
                                                     <div class="row">
                                                         <div class="col">
-                                                            <h5 class="text-wrap">
+                                                            <h5
+                                                                class="text-wrap"
+                                                            >
                                                                 {{
-                                                                message.message
+                                                                    message.message
                                                                 }}
                                                             </h5>
                                                         </div>
                                                     </div>
                                                     <hr />
-                                                    <div class="row text-center">
+                                                    <div
+                                                        class="row text-center"
+                                                    >
                                                         <div class="col">
                                                             <div
                                                                 v-for="(user,
@@ -46,21 +61,23 @@
                                                                 <div
                                                                     v-if="
                                                                         user.id ==
-                                                                            message.from_id
+                                                                        message.from_id
                                                                     "
                                                                 >
                                                                     <div
                                                                         v-if="
                                                                             current_user_id ==
-                                                                                user.id
+                                                                            user.id
                                                                         "
                                                                     >
-                                                                        <p>You</p>
+                                                                        <p>
+                                                                            You
+                                                                        </p>
                                                                     </div>
                                                                     <div v-else>
                                                                         <p>
                                                                             {{
-                                                                            user.first_name
+                                                                                user.first_name
                                                                             }}
                                                                         </p>
                                                                     </div>
@@ -70,8 +87,8 @@
                                                         <div class="col">
                                                             <p>
                                                                 {{
-                                                                message.date
-                                                                | ago
+                                                                    message.date
+                                                                        | ago
                                                                 }}
                                                             </p>
                                                         </div>
@@ -86,7 +103,11 @@
                         <div class="row">
                             <div class="col mt-4">
                                 <form @submit.prevent="sendMessage">
-                                    <input type="hidden" name="_token" :value="csrf" />
+                                    <input
+                                        type="hidden"
+                                        name="_token"
+                                        :value="csrf"
+                                    />
                                     <div class="row">
                                         <div class="col-9">
                                             <div class="form-group">
@@ -102,7 +123,9 @@
                                             <button
                                                 type="submit"
                                                 class="btn btn-primary btn-block"
-                                            >Send</button>
+                                            >
+                                                Send
+                                            </button>
                                         </div>
                                     </div>
                                 </form>

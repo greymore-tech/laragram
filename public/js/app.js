@@ -3058,6 +3058,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 $(document).ready(function () {
   var card_scroll_bottom = document.getElementById("card-scroll-bottom");
   card_scroll_bottom.scrollTop = card_scroll_bottom.scrollHeight; // var interval;
@@ -63903,7 +63933,27 @@ var render = function() {
         _c("div", { staticClass: "col-md-10" }, [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header text-center pt-3" }, [
-              _c("h2", [_vm._v(_vm._s(_vm.group_info.title))])
+              _c("h2", [_vm._v(_vm._s(_vm.group_info.title))]),
+              _vm._v(" "),
+              _c("p", [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "/dashboard/group/pin/" + _vm.group_info.id }
+                  },
+                  [_vm._v("PIN")]
+                ),
+                _vm._v("\n                        |\n                        "),
+                _c(
+                  "a",
+                  {
+                    attrs: {
+                      href: "/dashboard/group/unpin/" + _vm.group_info.id
+                    }
+                  },
+                  [_vm._v("UNPIN")]
+                )
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
@@ -63976,7 +64026,9 @@ var render = function() {
                                                           user.id
                                                             ? _c("div", [
                                                                 _c("p", [
-                                                                  _vm._v("You")
+                                                                  _vm._v(
+                                                                    "\n                                                                        You\n                                                                    "
+                                                                  )
                                                                 ])
                                                               ])
                                                             : _c("div", [
@@ -64097,7 +64149,11 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-primary btn-block", attrs: { type: "submit" } },
-        [_vm._v("Send")]
+        [
+          _vm._v(
+            "\n                                            Send\n                                        "
+          )
+        ]
       )
     ])
   }
