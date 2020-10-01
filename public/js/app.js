@@ -2478,6 +2478,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["users"],
   data: function data() {
@@ -63429,91 +63433,106 @@ var render = function() {
           _c("div", { staticClass: "card" }, [
             _vm._m(0),
             _vm._v(" "),
-            _c("form", { attrs: { method: "POST", action: "" } }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col" }, [
-                    _c("h4", { staticClass: "text-center" }, [
-                      _vm._v(
-                        "\n                                    Create New Group\n                                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: { type: "hidden", name: "_token" },
-                      domProps: { value: _vm.csrf }
-                    }),
-                    _vm._v(" "),
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _vm._m(2)
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col" }, [
-                    _c("h4", { staticClass: "text-center" }, [
-                      _vm._v(
-                        "\n                                    Add Contacts to Group\n                                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("table", { staticClass: "table" }, [
-                      _vm._m(3),
+            _c(
+              "form",
+              {
+                attrs: {
+                  method: "POST",
+                  action: _vm.location + "/dashboard/group/create"
+                }
+              },
+              [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col" }, [
+                      _c("h4", { staticClass: "text-center" }, [
+                        _vm._v(
+                          "\n                                    Create New Group\n                                "
+                        )
+                      ]),
                       _vm._v(" "),
-                      _c(
-                        "tbody",
-                        _vm._l(_vm.orderUsers, function(user, index) {
-                          return _c("tr", { key: index }, [
-                            _c("th", { attrs: { scope: "row" } }, [
-                              _c(
-                                "div",
-                                { staticClass: "form-check form-check-inline" },
-                                [
-                                  _c("input", {
-                                    staticClass: "form-check-input",
-                                    attrs: { type: "checkbox", id: "user-id" },
-                                    domProps: { value: user.id }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "form-check-label",
-                                      attrs: { for: "user-id" }
-                                    },
-                                    [_vm._v(_vm._s(index + 1))]
-                                  )
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { scope: "row" } }, [
-                              _vm._v(
-                                "\n                                                " +
-                                  _vm._s(user.first_name) +
+                      _c("input", {
+                        attrs: { type: "hidden", name: "_token" },
+                        domProps: { value: _vm.csrf }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._m(2)
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col" }, [
+                      _c("h4", { staticClass: "text-center" }, [
+                        _vm._v(
+                          "\n                                    Add Contacts to Group\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("table", { staticClass: "table" }, [
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.orderUsers, function(user, index) {
+                            return _c("tr", { key: index }, [
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "form-check form-check-inline"
+                                  },
+                                  [
+                                    _c("input", {
+                                      staticClass: "form-check-input",
+                                      attrs: {
+                                        type: "checkbox",
+                                        name: "user_id[]",
+                                        id: "user-id"
+                                      },
+                                      domProps: { value: user.id }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "form-check-label",
+                                        attrs: { for: "user-id" }
+                                      },
+                                      [_vm._v(_vm._s(index + 1))]
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { attrs: { scope: "row" } }, [
+                                _vm._v(
                                   "\n                                                " +
-                                  _vm._s(user.last_name) +
-                                  "\n                                                "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { scope: "row" } }, [
-                              _vm._v(
-                                "\n                                                +" +
-                                  _vm._s(user.phone) +
-                                  "\n                                            "
-                              )
+                                    _vm._s(user.first_name) +
+                                    "\n                                                " +
+                                    _vm._s(user.last_name) +
+                                    "\n                                                "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { attrs: { scope: "row" } }, [
+                                _vm._v(
+                                  "\n                                                +" +
+                                    _vm._s(user.phone) +
+                                    "\n                                            "
+                                )
+                              ])
                             ])
-                          ])
-                        }),
-                        0
-                      )
+                          }),
+                          0
+                        )
+                      ])
                     ])
                   ])
                 ])
-              ])
-            ])
+              ]
+            )
           ])
         ])
       ]
