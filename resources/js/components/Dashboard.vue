@@ -22,6 +22,8 @@
                                     >Create Group</a
                                 >
                             </div>
+                        </div>
+                        <div class="row mt-3">
                             <div class="col">
                                 <a
                                     :href="'dashboard/contacts'"

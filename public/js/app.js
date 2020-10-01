@@ -2865,6 +2865,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   // props: ["users", "groups", "channels"],
   props: ["messages", "chats", "users", "current_user_id"],
@@ -63466,7 +63468,7 @@ var render = function() {
                     _c("div", { staticClass: "col" }, [
                       _c("h4", { staticClass: "text-center" }, [
                         _vm._v(
-                          "\n                                    Add Contacts to Group\n                                "
+                          "\n                                    Add Members to Group\n                                "
                         )
                       ]),
                       _vm._v(" "),
@@ -63582,7 +63584,7 @@ var staticRenderFns = [
             },
             [
               _vm._v(
-                "\n                                                Create Channel\n                                            "
+                "\n                                                Create Group\n                                            "
               )
             ]
           )
@@ -63659,8 +63661,10 @@ var render = function() {
                     },
                     [_vm._v("Create Group")]
                   )
-                ]),
-                _vm._v(" "),
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mt-3" }, [
                 _c("div", { staticClass: "col" }, [
                   _c(
                     "a",

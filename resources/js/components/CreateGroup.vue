@@ -40,7 +40,7 @@
                                                     type="submit"
                                                     class="btn btn-primary btn-block"
                                                 >
-                                                    Create Channel
+                                                    Create Group
                                                 </button>
                                             </div>
                                         </div>
@@ -50,7 +50,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h4 class="text-center">
-                                        Add Contacts to Group
+                                        Add Members to Group
                                     </h4>
                                     <table class="table">
                                         <thead>
