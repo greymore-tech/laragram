@@ -1,6 +1,6 @@
 # Laragram
 
-A telegram web client built in laravel using Madeline Proto, an Async PHP client/server API for the telegram MTProto protocol. It is a telegram approved PHP implementation which we are trying to harness for a Laravel based Telegram Web Client.
+A telegram web client built in laravel using Madeline Proto, an Async PHP client/server API for the telegram MTProto protocol. MadelineProto is a telegram approved PHP implementation which we are trying to harness for a Laravel based Telegram Web Client.
 
 ## Wanna help out?
 
