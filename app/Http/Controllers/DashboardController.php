@@ -74,6 +74,14 @@ class DashboardController extends Controller
         return view('create_group', compact('users', 'current_user_first_name'));
     }
 
+    public function createGroup(Request $request)
+    {
+        //  create a new group with group title and group members
+        MadelineProto::getClient()->messages->createChat(['users' => $request['user_id'], 'title' => $request['title'], ]);
+
+        return redirect()->intended('/dashboard');
+    }
+
     public function showGroupMessages($group_id)
     {
         //  get current time
