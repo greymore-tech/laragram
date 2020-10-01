@@ -74,6 +74,18 @@ class DashboardController extends Controller
         return view('create_group', compact('users', 'current_user_first_name'));
     }
 
+    public function groupPin($group_id) {
+        MadelineProto::getClient()->messages->toggleDialogPin(['pinned' => 1, 'peer' => "chat#$group_id", ]);
+
+        return redirect()->back();
+    }
+
+    public function groupUnpin($group_id) {
+        MadelineProto::getClient()->messages->toggleDialogPin(['pinned' => 0, 'peer' => "chat#$group_id", ]);
+
+        return redirect()->back();
+    }
+
     public function createGroup(Request $request)
     {
         //  create a new group with group title and group members
