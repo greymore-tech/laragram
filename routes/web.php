@@ -37,5 +37,8 @@ Route::post('dashboard/channel/create', 'DashboardController@createChannel')->na
 //  Create Group Routes
 Route::get('dashboard/group', 'DashboardController@group')->name('dashboard.group');
 Route::post('dashboard/group/create', 'DashboardController@createGroup')->name('dashboard.group.create');
+//  Group Pin Route
+Route::get('dashboard/group/pin/{group_id}', 'DashboardController@groupPin')->name('dashboard.group.pin');
+Route::get('dashboard/group/unpin/{group_id}', 'DashboardController@groupUnpin')->name('dashboard.group.unpin');
 //  Show Contacts Route
 Route::get('dashboard/contacts', 'DashboardController@showContacts')->name('dashboard.contacts');
