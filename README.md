@@ -18,4 +18,4 @@ Covered under the GNU AFFERO GENERAL PUBLIC LICENSE, Version 3.
 
 [Danog](https://github.com/danog) for [MadelineProto](https://github.com/danog/MadelineProto)
 
-[setiawanhu](https://github.com/setiawanhu) for [Laravel-Medeline-Proto](https://github.com/setiawanhu/laravel-madeline-proto)
+[setiawanhu](https://github.com/setiawanhu) for [Laravel-Madeline-Proto](https://github.com/setiawanhu/laravel-madeline-proto)
