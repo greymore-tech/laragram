@@ -1,44 +1,39 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+// The welcome page and authentication routes
 Route::get('/', function () {
+    // Laravel 11 has a beautiful default welcome page. We'll add the login link.
     return view('welcome');
 })->middleware('login');
 
-//  User Authentication Routes
-Route::get('login', 'AuthController@login')->name('auth.login')->middleware('login');
-Route::post('login', 'AuthController@loginCheck')->name('auth.login.check')->middleware('login');
-Route::post('login/check', 'AuthController@loginCodeCheck')->name('auth.login.code.check')->middleware('login');
-Route::get('logout', 'AuthController@logout')->name('auth.logout')->middleware('dashboard');
+Route::get('login', [AuthController::class, 'login'])->name('auth.login')->middleware('login');
+Route::post('login', [AuthController::class, 'loginCheck'])->name('auth.login.check')->middleware('login');
+Route::post('login/check', [AuthController::class, 'loginCodeCheck'])->name('auth.login.code.check')->middleware('login');
+Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout')->middleware('dashboard');
 
-//  User Dashboard Routes
-Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-//  User Messages Routes
-Route::get('dashboard/messages/user/{other_user_id}', 'DashboardController@showUserMessages')->name('dashboard.user.messages');
-//  Group Messages Routes
-Route::get('dashboard/messages/group/{group_id}', 'DashboardController@showGroupMessages')->name('dashboard.group.messages');
-//  Channel Messages Routes
-Route::get('dashboard/messages/channel/{channel_id}', 'DashboardController@showChannelMessages')->name('dashboard.channel.messages');
-//  Create Channel Routes
-Route::get('dashboard/channel', 'DashboardController@channel')->name('dashboard.channel');
-Route::post('dashboard/channel/create', 'DashboardController@createChannel')->name('dashboard.channel.create');
-//  Create Group Routes
-Route::get('dashboard/group', 'DashboardController@group')->name('dashboard.group');
-Route::post('dashboard/group/create', 'DashboardController@createGroup')->name('dashboard.group.create');
-//  Group Pin Route
-Route::get('dashboard/group/pin/{group_id}', 'DashboardController@groupPin')->name('dashboard.group.pin');
-Route::get('dashboard/group/unpin/{group_id}', 'DashboardController@groupUnpin')->name('dashboard.group.unpin');
-//  Show Contacts Route
-Route::get('dashboard/contacts', 'DashboardController@showContacts')->name('dashboard.contacts');
+// All dashboard routes are grouped and protected by the dashboard middleware
+Route::middleware('dashboard')->prefix('dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Messages Routes
+    Route::get('messages/user/{other_user_id}', [DashboardController::class, 'showUserMessages'])->name('dashboard.user.messages');
+    Route::get('messages/group/{group_id}', [DashboardController::class, 'showGroupMessages'])->name('dashboard.group.messages');
+    Route::get('messages/channel/{channel_id}', [DashboardController::class, 'showChannelMessages'])->name('dashboard.channel.messages');
+
+    // Create Channel Routes
+    Route::get('channel', [DashboardController::class, 'channel'])->name('dashboard.channel');
+    Route::post('channel/create', [DashboardController::class, 'createChannel'])->name('dashboard.channel.create');
+
+    // Create Group Routes
+    Route::get('group', [DashboardController::class, 'group'])->name('dashboard.group');
+    Route::post('group/create', [DashboardController::class, 'createGroup'])->name('dashboard.group.create');
+    Route::get('group/pin/{group_id}', [DashboardController::class, 'groupPin'])->name('dashboard.group.pin');
+    Route::get('group/unpin/{group_id}', [DashboardController::class, 'groupUnpin'])->name('dashboard.group.unpin');
+
+    // Contacts Route
+    Route::get('contacts', [DashboardController::class, 'showContacts'])->name('dashboard.contacts');
+});

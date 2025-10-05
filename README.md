@@ -24,10 +24,10 @@ Our primary goal is to upgrade the entire stack to modern standards, making Lara
 We are looking for contributors to help us tackle the following roadmap. Feel free to pick any task you're comfortable with!
 
 ### Phase 1: Stabilize & Modernize (High Priority)
-*   [ ] **Upgrade PHP Requirement:** Update `composer.json` to require `^8.2`.
-*   [ ] **Upgrade the Laravel Framework:** Follow the official guides to upgrade the project from Laravel 7 through to the latest version (Laravel 11). This involves updating dependencies, configuration files, and addressing breaking changes.
-*   [ ] **Upgrade MadelineProto:** Remove the unmaintained `setiawanhu/laravel-madeline-proto` wrapper and integrate `danog/madelineproto` v8 directly. This may require creating a new Service Provider.
-*   [ ] **Modernize Frontend Tooling:** Migrate the asset compilation from Laravel Mix (`webpack.mix.js`) to Vite (`vite.config.js`).
+*   [x] **Upgrade PHP Requirement:** Update `composer.json` to require `^8.2`.
+*   [x] **Upgrade the Laravel Framework:** Follow the official guides to upgrade the project from Laravel 7 through to the latest version (Laravel 11). This involves updating dependencies, configuration files, and addressing breaking changes.
+*   [x] **Upgrade MadelineProto:** Remove the unmaintained `setiawanhu/laravel-madeline-proto` wrapper and integrate `danog/madelineproto` v8 directly. This may require creating a new Service Provider.
+*   [x] **Modernize Frontend Tooling:** Migrate the asset compilation from Laravel Mix (`webpack.mix.js`) to Vite (`vite.config.js`).
 
 ### Phase 2: Refactor for Scalability
 *   [ ] **Create a `TelegramService` Class:** Abstract all MadelineProto API calls out of the controllers and into a dedicated service class (`app/Services/TelegramService.php`). This will clean up the controllers and make the code more maintainable and testable.

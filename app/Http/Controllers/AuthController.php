@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use MadelineProto;
 use Illuminate\Http\Request;
+use App\Facades\MadelineProto;
 
 class AuthController extends Controller
 {
