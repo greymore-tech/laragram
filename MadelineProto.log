@@ -1,0 +1,321 @@
+Logger:         	MadelineProto 8.6.0
+Logger:         	Copyright (C) 2016-2025 Daniil Gentili
+Logger:         	Licensed under AGPLv3
+Logger:         	https://github.com/danog/MadelineProto
+Serialization:  	Got exclusive session lock!
+MTProto:        	The database settings have changed!
+MTProto:        	The prometheus settings have changed!
+MTProto:        	The serialization settings have changed!
+DataCenter:     	Connecting to DC 2
+DataCenterConnection: 	Restoring 0 messages to DC 2
+Session:        	Resetting session in DC 2.0 due to creating initial session...
+Connection:     	Connecting to DC 2.0 via tcp://149.154.167.51:443 main DC 2, via ipv4 using AbridgedStream => BufferedRawStream => DefaultStream 
+DataCenterConnection: 	Handling auth key transition to UNENCRYPTED_NO_PERMANENT in DC 2
+DataCenterConnection: 	Generating permanent authorization key for DC 2...
+Connection:     	Connected to DC 2.0 via tcp://149.154.167.51:443 main DC 2, via ipv4 using AbridgedStream => BufferedRawStream => DefaultStream!
+AuthKeyHandler: 	Factorizing with native_single_cpp (please wait, might take a while)
+AuthKeyHandler: 	Factorizing with python_single_alt (please wait, might take a while)
+AuthKeyHandler: 	Install https://prime.madelineproto.xyz and the FFI extension to speed this up!
+AuthKeyHandler: 	Factorizing with python_single (please wait, might take a while)
+AuthKeyHandler: 	Install https://prime.madelineproto.xyz and the FFI extension to speed this up!
+AuthKeyHandler: 	Factorizing with native_single (please wait, might take a while)
+AuthKeyHandler: 	Install https://prime.madelineproto.xyz and the FFI extension to speed this up!
+AuthKeyHandler: 	Auth key generated
+DataCenterConnection: 	Finished auth key transition to UNENCRYPTED_NO_PERMANENT in DC 2
+DataCenterConnection: 	Handling auth key transition to UNENCRYPTED in DC 2
+DataCenterConnection: 	Generating temporary authorization key for DC 2...
+AuthKeyHandler: 	Factorizing with native_single_cpp (please wait, might take a while)
+AuthKeyHandler: 	Factorizing with python_single_alt (please wait, might take a while)
+AuthKeyHandler: 	Install https://prime.madelineproto.xyz and the FFI extension to speed this up!
+AuthKeyHandler: 	Factorizing with python_single (please wait, might take a while)
+AuthKeyHandler: 	Install https://prime.madelineproto.xyz and the FFI extension to speed this up!
+AuthKeyHandler: 	Factorizing with native_single (please wait, might take a while)
+AuthKeyHandler: 	Install https://prime.madelineproto.xyz and the FFI extension to speed this up!
+AuthKeyHandler: 	Auth key generated
+DataCenterConnection: 	Finished auth key transition to UNENCRYPTED in DC 2
+DataCenterConnection: 	Handling auth key transition to ENCRYPTED_NOT_BOUND in DC 2
+DataCenterConnection: 	Bound temporary and permanent authorization keys, DC 2
+DataCenterConnection: 	Handling auth key transition to ENCRYPTED_NOT_INITED in DC 2
+DataCenterConnection: 	Writing client info (also executing help.getConfig)...
+DataCenterConnection: 	Finished auth key transition to ENCRYPTED_NOT_INITED in DC 2
+DataCenterConnection: 	Handling auth key transition to ENCRYPTED_NOT_AUTHED_NO_LOGIN in DC 2
+DataCenterConnection: 	Finished auth key transition to ENCRYPTED_NOT_AUTHED_NO_LOGIN in DC 2
+MTProto:        	Updated config!
+APIWrapper:     	Prompting initial serialization...
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/lightState.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/lightState.php.lock...
+APIWrapper:     	Saved session!
+APIWrapper:     	Done initial serialization!
+APIWrapper:     	Shutting down MadelineProto (danog\MadelineProto\API)
+MTProto:        	Will unreference instance
+DataCenterConnection: 	Disconnecting from shared DC 2
+Connection:     	Disconnecting from DC 2.0
+DataCenterConnection: 	Backed up help.getConfig,  from DC 2.0
+Connection:     	Disconnected from DC 2.0
+DataCenterConnection: 	Backed up 1, added to 0 existing messages) from DC 2
+MTProto:        	Unreferenced instance
+APIWrapper:     	Prompting final serialization...
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/lightState.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/lightState.php.lock...
+APIWrapper:     	Saved session!
+APIWrapper:     	Done final serialization!
+Serialization:  	Unlocking exclusive session lock!
+Serialization:  	Unlocked exclusive session lock!
+DataCenter:     	Connecting to DC 2
+DataCenterConnection: 	Restoring 0 messages to DC 2
+Session:        	Resetting session in DC 2.0 due to creating initial session...
+Connection:     	Connecting to DC 2.0 via tcp://149.154.167.41:443 main DC 2, via ipv4 using AbridgedStream => BufferedRawStream => DefaultStream 
+DataCenterConnection: 	Handling auth key transition to ENCRYPTED_NOT_AUTHED_NO_LOGIN in DC 2
+DataCenterConnection: 	Finished auth key transition to ENCRYPTED_NOT_AUTHED_NO_LOGIN in DC 2
+Connection:     	Connected to DC 2.0 via tcp://149.154.167.41:443 main DC 2, via ipv4 using AbridgedStream => BufferedRawStream => DefaultStream!
+MTProto:        	AUTH_KEY_UNREGISTERED
+APIWrapper:     	MadelineProto is ready!
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/ipcState.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/ipcState.php.lock...
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/lightState.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/lightState.php.lock...
+APIWrapper:     	Saved session!
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/lightState.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/lightState.php.lock...
+APIWrapper:     	Saved session!
+AbstractServer: 	Starting IPC server /tmp/session.madeline (process)
+ProcessRunner:  	Starting process with '/usr/bin/php' '-dhtml_errors=0' '-ddisplay_errors=0' '-dlog_errors=1' '/var/www/html/vendor/danog/madelineproto/src/Ipc/Runner/entry.php' 'madeline-ipc' '/tmp/session.madeline' '1756081603'
+WebRunner:      	Successfully connected to tcp://0.0.0.0:80!
+WebRunner:      	Sending payload: GET /vendor/danog/madelineproto/src/Ipc/Runner/entry.php?argv%5B0%5D=madeline-ipc&argv%5B1%5D=%2Ftmp%2Fsession.madeline&argv%5B2%5D=1756081603&cwd=%2Fvar%2Fwww%2Fhtml%2Fpublic&MadelineSelfRestart=1 HTTP/1.1
+Host: 0.0.0.0
+
+
+Exception:      	fsockopen(): SSL: Handshake timed out in WebRunner.php:123
+WebRunner:      	Error while sending to tls://0.0.0.0:80: \danog\MadelineProto\Exception: fsockopen(): SSL: Handshake timed out in /var/www/html/vendor/danog/madelineproto/src/Ipc/Runner/WebRunner.php:123
+Revision: 8.6.0
+TL Trace:
+<br>
+exceptionErrorHandler()<br>
+WebRunner.php(123): 	fsockopen()<br>
+WebRunner.php(78):  	selfStart()<br>
+AbstractServer.php(122):	start()<br>
+Serialization.php(176):	startMe()<br>
+AbstractDriver.php(430):	{closure:Amp\async():23}()<br>
+AbstractDriver.php(621):	invokeMicrotasks()<br>
+{closure:Revolt\EventLoop\Internal\AbstractDriver::createCallbackFiber():565}()<br>
+DriverSuspension.php(64):	resume()<br>
+AbstractDriver.php(430):	{closure:Revolt\EventLoop\Internal\DriverSuspension::resume():61}()<br>
+AbstractDriver.php(621):	invokeMicrotasks()<br>
+{closure:Revolt\EventLoop\Internal\AbstractDriver::createCallbackFiber():565}()<br>
+DriverSuspension.php(64):	resume()<br>
+AbstractDriver.php(430):	{closure:Revolt\EventLoop\Internal\DriverSuspension::resume():61}()<br>
+AbstractDriver.php(621):	invokeMicrotasks()<br>
+{closure:Revolt\EventLoop\Internal\AbstractDriver::createCallbackFiber():565}()<br>
+AbstractDriver.php(502):	resume()<br>
+AbstractDriver.php(558):	invokeCallbacks()<br>
+{closure:Revolt\EventLoop\Internal\AbstractDriver::createLoopFiber():538}()<br>
+AbstractDriver.php(96):	resume()<br>
+DriverSuspension.php(117):	{closure:Revolt\EventLoop\Internal\AbstractDriver::__construct():90}()<br>
+Future.php(251):    	suspend()<br>
+API.php(313):       	await()<br>
+API.php(224):       	connectToMadelineProto()<br>
+MadelineProtoService.php(39):	__construct()<br>
+MadelineProtoService.php(47):	getClient()<br>
+Facade.php(363):    	__call()<br>
+Login.php(14):      	__callStatic()<br>
+Pipeline.php(219):  	handle()<br>
+SubstituteBindings.php(50):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+VerifyCsrfToken.php(87):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+ShareErrorsFromSession.php(48):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+StartSession.php(120):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+StartSession.php(63):	handleStatefulRequest()<br>
+Pipeline.php(219):  	handle()<br>
+AddQueuedCookiesToResponse.php(36):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+EncryptCookies.php(74):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+Pipeline.php(137):  	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Router.php(821):    	then()<br>
+Router.php(800):    	runRouteWithinStack()<br>
+Router.php(764):    	runRoute()<br>
+Router.php(753):    	dispatchToRoute()<br>
+Kernel.php(200):    	dispatch()<br>
+Pipeline.php(180):  	{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()<br>
+TransformsRequest.php(21):	{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()<br>
+ConvertEmptyStringsToNull.php(31):	handle()<br>
+Pipeline.php(219):  	handle()<br>
+TransformsRequest.php(21):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+TrimStrings.php(51):	handle()<br>
+Pipeline.php(219):  	handle()<br>
+ValidatePostSize.php(27):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+PreventRequestsDuringMaintenance.php(109):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+HandleCors.php(48): 	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+TrustProxies.php(58):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+InvokeDeferredCallbacks.php(22):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+ValidatePathEncoding.php(26):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+Pipeline.php(137):  	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Kernel.php(175):    	then()<br>
+Kernel.php(144):    	sendRequestThroughRouter()<br>
+Application.php(1220):	handle()<br>
+index.php(20):      	handleRequest()<br>
+server.php(21):     	require_once("\/var\/www\/html\/public\/index.php")
+Exception:      	fsockopen(): Unable to connect to tls://0.0.0.0:443 (Connection refused) in WebRunner.php:123
+WebRunner:      	Error while sending to tls://0.0.0.0:443: \danog\MadelineProto\Exception: fsockopen(): Unable to connect to tls://0.0.0.0:443 (Connection refused) in /var/www/html/vendor/danog/madelineproto/src/Ipc/Runner/WebRunner.php:123
+Revision: 8.6.0
+TL Trace:
+<br>
+exceptionErrorHandler()<br>
+WebRunner.php(123): 	fsockopen()<br>
+WebRunner.php(78):  	selfStart()<br>
+AbstractServer.php(122):	start()<br>
+Serialization.php(176):	startMe()<br>
+AbstractDriver.php(430):	{closure:Amp\async():23}()<br>
+AbstractDriver.php(621):	invokeMicrotasks()<br>
+{closure:Revolt\EventLoop\Internal\AbstractDriver::createCallbackFiber():565}()<br>
+DriverSuspension.php(64):	resume()<br>
+AbstractDriver.php(430):	{closure:Revolt\EventLoop\Internal\DriverSuspension::resume():61}()<br>
+AbstractDriver.php(621):	invokeMicrotasks()<br>
+{closure:Revolt\EventLoop\Internal\AbstractDriver::createCallbackFiber():565}()<br>
+DriverSuspension.php(64):	resume()<br>
+AbstractDriver.php(430):	{closure:Revolt\EventLoop\Internal\DriverSuspension::resume():61}()<br>
+AbstractDriver.php(621):	invokeMicrotasks()<br>
+{closure:Revolt\EventLoop\Internal\AbstractDriver::createCallbackFiber():565}()<br>
+AbstractDriver.php(502):	resume()<br>
+AbstractDriver.php(558):	invokeCallbacks()<br>
+{closure:Revolt\EventLoop\Internal\AbstractDriver::createLoopFiber():538}()<br>
+AbstractDriver.php(96):	resume()<br>
+DriverSuspension.php(117):	{closure:Revolt\EventLoop\Internal\AbstractDriver::__construct():90}()<br>
+Future.php(251):    	suspend()<br>
+API.php(313):       	await()<br>
+API.php(224):       	connectToMadelineProto()<br>
+MadelineProtoService.php(39):	__construct()<br>
+MadelineProtoService.php(47):	getClient()<br>
+Facade.php(363):    	__call()<br>
+Login.php(14):      	__callStatic()<br>
+Pipeline.php(219):  	handle()<br>
+SubstituteBindings.php(50):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+VerifyCsrfToken.php(87):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+ShareErrorsFromSession.php(48):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+StartSession.php(120):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+StartSession.php(63):	handleStatefulRequest()<br>
+Pipeline.php(219):  	handle()<br>
+AddQueuedCookiesToResponse.php(36):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+EncryptCookies.php(74):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+Pipeline.php(137):  	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Router.php(821):    	then()<br>
+Router.php(800):    	runRouteWithinStack()<br>
+Router.php(764):    	runRoute()<br>
+Router.php(753):    	dispatchToRoute()<br>
+Kernel.php(200):    	dispatch()<br>
+Pipeline.php(180):  	{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}()<br>
+TransformsRequest.php(21):	{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}()<br>
+ConvertEmptyStringsToNull.php(31):	handle()<br>
+Pipeline.php(219):  	handle()<br>
+TransformsRequest.php(21):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+TrimStrings.php(51):	handle()<br>
+Pipeline.php(219):  	handle()<br>
+ValidatePostSize.php(27):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+PreventRequestsDuringMaintenance.php(109):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+HandleCors.php(48): 	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+TrustProxies.php(58):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+InvokeDeferredCallbacks.php(22):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+ValidatePathEncoding.php(26):	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Pipeline.php(219):  	handle()<br>
+Pipeline.php(137):  	{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}()<br>
+Kernel.php(175):    	then()<br>
+Kernel.php(144):    	sendRequestThroughRouter()<br>
+Application.php(1220):	handle()<br>
+index.php(20):      	handleRequest()<br>
+server.php(21):     	require_once("\/var\/www\/html\/public\/index.php")
+Serialization:  	MadelineProto is starting, please wait...
+Serialization:  	Connected to IPC socket!
+AbstractServer: 	Accepted IPC client connection!
+AbstractServer: 	IPC server started successfully!
+MTProto:        	Will unreference instance
+DataCenterConnection: 	Disconnecting from shared DC 2
+DataCenterConnection: 	Backed up 0, added to 1 existing messages) from DC 2
+MTProto:        	Unreferenced instance
+APIWrapper:     	MadelineProto is ready!
+MTProto:        	Shutting down MadelineProto (MTProto)
+MTProto:        	Will unreference instance
+DataCenterConnection: 	Disconnecting from shared DC 2
+DataCenterConnection: 	Backed up 0, added to 1 existing messages) from DC 2
+MTProto:        	Unreferenced instance
+MTProto:        	Successfully destroyed MadelineProto
+ProcessRunner:  	Got final message from worker: 
+ProcessRunner:  	Got final message from worker: 
+Logger:         	MadelineProto 8.6.0
+Logger:         	Copyright (C) 2016-2025 Daniil Gentili
+Logger:         	Licensed under AGPLv3
+Logger:         	https://github.com/danog/MadelineProto
+AbstractServer: 	Accepted IPC client connection!
+Serialization:  	MadelineProto is starting, please wait...
+Serialization:  	Connected to IPC socket!
+Logger:         	MadelineProto 8.6.0
+Logger:         	Copyright (C) 2016-2025 Daniil Gentili
+Logger:         	Licensed under AGPLv3
+Logger:         	https://github.com/danog/MadelineProto
+Serialization:  	MadelineProto is starting, please wait...
+Serialization:  	Connected to IPC socket!
+AbstractServer: 	Accepted IPC client connection!
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/lightState.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/lightState.php.lock...
+APIWrapper:     	Saved session!
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/lightState.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/lightState.php.lock...
+APIWrapper:     	Saved session!
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/lightState.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/lightState.php.lock...
+APIWrapper:     	Saved session!
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/lightState.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/lightState.php.lock...
+APIWrapper:     	Saved session!
+Logger:         	MadelineProto 8.6.0
+Logger:         	Copyright (C) 2016-2025 Daniil Gentili
+Logger:         	Licensed under AGPLv3
+Logger:         	https://github.com/danog/MadelineProto
+Serialization:  	MadelineProto is starting, please wait...
+Serialization:  	Connected to IPC socket!
+AbstractServer: 	Accepted IPC client connection!
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/safe.php.lock...
+SessionPaths:   	Waiting for exclusive lock of /tmp/session.madeline/lightState.php.lock...
+SessionPaths:   	Got exclusive lock of /tmp/session.madeline/lightState.php.lock...
+APIWrapper:     	Saved session!
+Logger:         	MadelineProto 8.6.0
+Logger:         	Copyright (C) 2016-2025 Daniil Gentili
+Logger:         	Licensed under AGPLv3
+Logger:         	https://github.com/danog/MadelineProto
+Serialization:  	MadelineProto is starting, please wait...
+Serialization:  	Connected to IPC socket!
+AbstractServer: 	Accepted IPC client connection!
