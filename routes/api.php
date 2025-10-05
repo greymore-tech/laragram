@@ -6,6 +6,8 @@ use App\Http\Controllers\ChatController;
 
 Route::get('profile-photo/{peerType}/{peerId}', [ChatController::class, 'getProfilePhoto']);
 
+Route::get('dialogs', [ChatController::class, 'getDialogs']);
+
 // Users API Route
 Route::get('user/chat-data/{user_id}', [ChatController::class, 'getUserChatData']);
 Route::post('dashboard/message/user/{other_user_id}/send', [ChatController::class, 'sendUserMessage']);

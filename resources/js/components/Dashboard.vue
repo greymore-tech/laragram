@@ -11,12 +11,11 @@
                 <a :href="location + '/dashboard/contacts'" class="btn btn-primary">New Chat</a>
             </div>
 
-            <div class="chat-list">
+            <div class="chat-list" @scroll="handleScroll">
                 <a v-for="dialog in filteredDialogs" :key="dialog.id" :href="dialog.link" class="chat-list-item">
-                    <!-- THE CHANGE IS HERE: New Avatar Structure -->
                     <div class="avatar chat-avatar">
                         <span class="avatar-initials">{{ getAvatarInitials(dialog.name) }}</span>
-                        <img :src="getAvatarUrl(dialog.peerId)" @error="onImageError" class="avatar-image" alt="">
+                        <img :src="getAvatarUrl(dialog.peerId, dialog.peerType)" @error="onImageError" class="avatar-image" alt="">
                     </div>
                     <div class="chat-info">
                         <h5>{{ dialog.name }}</h5>
@@ -36,6 +35,7 @@
 
 <script>
 import _ from 'lodash';
+import axios from 'axios';
 
 export default {
     props: ["messages", "chats", "users", "current_user_id"],
@@ -43,24 +43,31 @@ export default {
         return {
             search: '',
             location: window.location.origin,
+            // --- New data properties for pagination ---
+            dialogMessages: [...this.messages],
+            dialogChats: [...this.chats],
+            dialogUsers: [...this.users],
+            isLoading: false, // Prevents multiple loads at once
+            allDialogsLoaded: false, // Stops loading when all chats are fetched
         };
     },
     computed: {
         userMap() {
             const map = new Map();
-            this.users.forEach(user => map.set(user.id, user));
+            this.dialogUsers.forEach(user => map.set(user.id, user));
             return map;
         },
         chatMap() {
             const map = new Map();
-            this.chats.forEach(chat => map.set(chat.id, chat));
+            this.dialogChats.forEach(chat => map.set(chat.id, chat));
             return map;
         },
         dialogs() {
             const dialogs = [];
-            for (const message of this.messages) {
+            for (const message of this.dialogMessages) {
                 if (!message.peer_id) continue;
                 const peerId = typeof message.peer_id === 'object' ? (message.peer_id.user_id || message.peer_id.chat_id || message.peer_id.channel_id) : message.peer_id;
+
                 if (this.userMap.has(peerId)) {
                     const user = this.userMap.get(peerId);
                     if (user.id === 777000) continue;
@@ -116,6 +123,64 @@ export default {
                 return words[0][0].toUpperCase();
             }
             return '?';
+        },
+
+        /**
+         * Triggered when the user scrolls the chat list.
+         * Loads the next page of dialogs if near the bottom.
+         */
+        handleScroll(event) {
+            const el = event.target;
+            const isAtBottom = el.scrollHeight - el.scrollTop <= el.clientHeight + 200; // 200px buffer
+
+            if (isAtBottom && !this.isLoading && !this.allDialogsLoaded) {
+                this.loadMoreDialogs();
+            }
+        },
+
+        /**
+         * Fetches the next page of dialogs from the API.
+         */
+        loadMoreDialogs() {
+            this.isLoading = true;
+
+            const lastMessage = this.dialogMessages[this.dialogMessages.length - 1];
+            if (!lastMessage) {
+                this.isLoading = false;
+                this.allDialogsLoaded = true;
+                return;
+            }
+
+            // Construct the API URL with pagination cursors.
+            const params = new URLSearchParams({
+                offset_date: lastMessage.date,
+                offset_id: lastMessage.id,
+                offset_peer: JSON.stringify(lastMessage.peer_id), // MadelineProto needs this object
+            });
+            const url = `${this.location}/api/dialogs?${params.toString()}`;
+
+            axios.get(url).then(response => {
+                const data = response.data;
+
+                if (data.messages.length === 0) {
+                    this.allDialogsLoaded = true;
+                    return;
+                }
+
+                // Merge the new data with the existing data.
+                this.dialogMessages.push(...data.messages);
+                this.dialogUsers.push(...data.users);
+                this.dialogChats.push(...data.chats);
+
+                // De-duplicate just in case.
+                this.dialogUsers = _.uniqBy(this.dialogUsers, 'id');
+                this.dialogChats = _.uniqBy(this.dialogChats, 'id');
+
+            }).catch(error => {
+                console.error("Failed to load more dialogs:", error);
+            }).finally(() => {
+                this.isLoading = false;
+            });
         }
     }
 };

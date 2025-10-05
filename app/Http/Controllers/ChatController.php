@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Facades\MadelineProto;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response; // Import the Response facade
 
 class ChatController extends Controller
 {
@@ -105,62 +106,41 @@ class ChatController extends Controller
     }
 
     /**
-     * API endpoint to download media from a message. This is the corrected version.
+     * API endpoint to download media from a message.
      */
     public function downloadMedia(Request $request)
     {
-        // 1. Validate all required parameters.
         $messageId = $request->query('messageId');
         $peerId = $request->query('peerId');
         $peerType = $request->query('peerType');
-
         if (!$messageId || !$peerId || !$peerType) {
             abort(400, 'Missing required parameters: messageId, peerId, and peerType are required.');
         }
 
-        // 2. Construct the correct peer identifier.
         $peer = null;
         switch ($peerType) {
-            case 'user':
-                $peer = (int) $peerId;
-                break;
-            case 'group':
-                $peer = "chat#{$peerId}";
-                break;
-            case 'channel':
-                $peer = (int) $peerId;
-                break;
-            default:
-                abort(400, 'Invalid peerType provided.');
+            case 'user': $peer = (int) $peerId; break;
+            case 'group': $peer = "chat#{$peerId}"; break;
+            case 'channel': $peer = (int) $peerId; break;
+            default: abort(400, 'Invalid peerType provided.');
         }
 
         try {
             $mp = MadelineProto::getClient();
-
-            // 3. THE FIX: Fetch the message using BOTH the peer and the message ID.
-            //    The 'channels->getMessages' method is a robust way to do this for all peer types.
             $messages = $mp->channels->getMessages(['channel' => $peer, 'id' => [(int) $messageId]]);
-
             if (empty($messages['messages'])) {
                 abort(404, 'Message not found in the specified chat.');
             }
             $message = $messages['messages'][0];
-
             if (!isset($message['media'])) {
                 abort(404, 'No media found in this message.');
             }
-
-            // 4. Prepare the temporary download path.
             $path = storage_path('app/public/temp_media');
             if (!is_dir($path)) {
                 mkdir($path, 0755, true);
             }
-
-            // 5. Download the file from Telegram.
             $tempFilePath = $mp->downloadToFile($message, $path . '/' . uniqid('media_', true));
-
-            // 6. Determine a user-friendly filename.
-            $finalFileName = "download"; // Default filename.
+            $finalFileName = "download";
             if (isset($message['media']['document']['attributes'])) {
                 foreach ($message['media']['document']['attributes'] as $attribute) {
                     if ($attribute['_'] === 'documentAttributeFilename' && isset($attribute['file_name'])) {
@@ -169,10 +149,7 @@ class ChatController extends Controller
                     }
                 }
             }
-
-            // 7. Stream the download to the user and delete the temporary file afterwards.
             return response()->download($tempFilePath, $finalFileName)->deleteFileAfterSend(true);
-
         } catch (\Throwable $e) {
             Log::error("Media download failed for message {$messageId} in peer {$peer}: " . $e->getMessage());
             abort(500, 'Could not download media. The file may be inaccessible or expired.');
@@ -181,49 +158,76 @@ class ChatController extends Controller
 
     /**
      * Downloads and streams a peer's profile photo.
-     * This acts as a secure proxy for displaying images in the frontend.
-     * It now correctly handles different peer types (user, group, channel).
-     *
-     * @param string $peerType The type of peer ('user', 'group', 'channel').
-     * @param string $peerId   The ID of the peer.
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * This version is more robust and returns a 404 on failure instead of redirecting.
      */
     public function getProfilePhoto($peerType, $peerId)
     {
-        // 1. Construct the correct peer identifier based on the provided type.
+        // 1. Construct the correct peer identifier.
         $peer = null;
         switch ($peerType) {
-            case 'user':
-                $peer = (int) $peerId;
-                break;
-            case 'group':
-                $peer = "chat#{$peerId}";
-                break;
-            case 'channel':
-                $peer = (int) $peerId;
-                break;
+            case 'user': $peer = (int) $peerId; break;
+            case 'group': $peer = "chat#{$peerId}"; break;
+            case 'channel': $peer = (int) $peerId; break;
             default:
-                // If the type is invalid, immediately redirect to the placeholder.
-                return redirect('/img/placeholder.png');
+                // If type is invalid, return a 404 Not Found response.
+                return Response::make('Invalid peer type.', 404);
         }
 
         try {
             $mp = MadelineProto::getClient();
 
-            // 2. Download the photo to memory using the correct peer identifier.
-            $file = $mp->downloadToMemory($peer);
+            // 2. Explicitly get the full peer info.
+            $peerInfo = $mp->getFullInfo($peer);
+            $photo = $peerInfo['full']['profile_photo'] ?? null;
 
-            // 3. Stream the file from memory with appropriate headers.
-            // Caching for 1 hour to reduce API calls on the same photo.
+            // 3. Check if a photo property exists. If not, fail gracefully.
+            if (!$photo) {
+                Log::info("No profile photo available for peer {$peerId} ({$peerType}).");
+                return Response::make('No profile photo found.', 404);
+            }
+
+            // 4. Download the specific photo object to memory. This is more reliable.
+            $file = $mp->downloadToMemory($photo);
+
+            // 5. Stream the file from memory with appropriate headers.
             return response($file)
                 ->header('Content-Type', 'image/jpeg')
                 ->header('Cache-Control', 'max-age=3600, public');
 
         } catch (\Throwable $e) {
-            // 4. If a photo doesn't exist or any other error occurs,
-            //    log the warning and redirect to the placeholder image.
+            // 6. If any API error occurs, log it and return a 404.
             Log::warning("Could not get profile photo for peer {$peerId} ({$peerType}): " . $e->getMessage());
-            return redirect('/img/placeholder.png');
+            return Response::make('Error fetching profile photo.', 404);
+        }
+    }
+
+    /**
+     * API endpoint to fetch a paginated list of dialogs (chats).
+     * Uses an offset_date and offset_id to get the next "page" of chats.
+     */
+    public function getDialogs(Request $request)
+    {
+        // Get pagination cursors from the request, with safe defaults.
+        $offsetDate = $request->query('offset_date', 0);
+        $offsetId = $request->query('offset_id', 0);
+        $offsetPeer = $request->query('offset_peer', ['_' => 'inputPeerEmpty']);
+        $limit = 50; // Fetch 50 chats per page.
+
+        try {
+            $mp = MadelineProto::getClient();
+
+            $dialogs = $mp->messages->getDialogs([
+                'offset_date' => (int) $offsetDate,
+                'offset_id' => (int) $offsetId,
+                'offset_peer' => $offsetPeer,
+                'limit' => $limit,
+            ]);
+
+            return response()->json($dialogs);
+
+        } catch (\Throwable $e) {
+            Log::error("API error fetching paginated dialogs: " . $e->getMessage());
+            return response()->json(['error' => 'Could not fetch dialogs'], 500);
         }
     }
 }

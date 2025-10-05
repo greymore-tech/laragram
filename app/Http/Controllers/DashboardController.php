@@ -10,17 +10,19 @@ use Illuminate\Support\Facades\Log;
 class DashboardController extends Controller
 {
     /**
-     * Display the main dashboard with a list of recent chats.
+     * Display the main dashboard.
+     * Now loads only the FIRST page of dialogs for a faster initial load.
      */
     public function index()
     {
         $mp = MadelineProto::getClient();
-        $dialogs = $mp->getFullDialogs();
-        $get_dialogs = $mp->messages->getPeerDialogs(['peers' => $dialogs]);
 
-        $messages = json_encode($get_dialogs['messages']);
-        $chats = json_encode($get_dialogs['chats']);
-        $users = json_encode($get_dialogs['users']);
+        // Fetch only the first 50 dialogs.
+        $dialogs = $mp->messages->getDialogs(['limit' => 50]);
+
+        $messages = json_encode($dialogs['messages']);
+        $chats = json_encode($dialogs['chats']);
+        $users = json_encode($dialogs['users']);
 
         $self = MadelineProto::getSelf();
         $current_user_first_name = $self['first_name'];

@@ -1,64 +1,30 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center align-items-center mt-4 mb-4">
-            <div class="col-md-10">
-                <div class="card">
-                    <div class="card-header text-center pt-3">
-                        <h2>Dashboard</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <h4 class="text-center">Create New Channel</h4>
-                                <form
-                                    method="POST"
-                                    :action="
-                                                location +
-                                                    '/dashboard/channel/create'
-                                            "
-                                >
-                                    <input type="hidden" name="_token" :value="csrf" />
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <input
-                                                    type="text"
-                                                    class="form-control"
-                                                    name="title"
-                                                    placeholder="Write channel title..."
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <textarea
-                                                    type="text"
-                                                    class="form-control"
-                                                    name="about"
-                                                    placeholder="Write channel description..."
-                                                    rows="3"
-                                                ></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <button
-                                                    type="submit"
-                                                    class="btn btn-primary btn-block"
-                                                >Create Channel</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="auth-wrapper">
+        <div class="auth-card" style="max-width: 500px;">
+            <div class="auth-icon">
+                <i class="fa-solid fa-bullhorn"></i>
             </div>
+            <h2>New Channel</h2>
+
+            <form :action="location + '/dashboard/channel/create'" method="POST" class="auth-form">
+                <input type="hidden" name="_token" :value="csrf" />
+
+                <div class="form-group">
+                    <label for="title" class="form-label mb-1">Channel Name</label>
+                    <input id="title" type="text" name="title" class="form-control" placeholder="Enter channel name..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="about" class="form-label mb-1">Description (Optional)</label>
+                    <textarea id="about" name="about" class="form-control" placeholder="Enter a short description..." rows="3"></textarea>
+                </div>
+
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        Create Channel
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </template>
@@ -67,10 +33,8 @@
 export default {
     data() {
         return {
-            csrf: document
-                .querySelector('meta[name="csrf-token"]')
-                .getAttribute("content"),
-            location: location.origin,
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+            location: window.location.origin,
         };
     },
 };
