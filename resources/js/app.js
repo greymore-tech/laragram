@@ -30,12 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// --- VUE APP INITIALIZATION ---
-
 // Import Components
-import ChatView from './components/ChatView.vue'; // The only chat component we need
-import Login from './components/Login.vue';
-import LoginCodeCheck from './components/LoginCodeCheck.vue';
+import ChatView from './components/ChatView.vue';
 import Dashboard from './components/Dashboard.vue';
 import Contacts from './components/Contacts.vue';
 import CreateChannel from './components/CreateChannel.vue';
@@ -44,9 +40,7 @@ import CreateGroup from './components/CreateGroup.vue';
 const app = createApp({});
 
 // Register Components
-app.component('chat-view', ChatView); // Register the new generic component
-app.component('login', Login);
-app.component('login-code-check', LoginCodeCheck);
+app.component('chat-view', ChatView);
 app.component('dashboard', Dashboard);
 app.component('contacts', Contacts);
 app.component('create-channel', CreateChannel);
