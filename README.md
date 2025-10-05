@@ -1,7 +1,7 @@
 # Laragram: A Telegram Web Client in Laravel
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Hacktoberfest](https://img.shields.io/badge/Hacktoberfest-2024-purple.svg)](https://hacktoberfest.com/)
+[![Hacktoberfest](https://img.shields.io/badge/Hacktoberfest-2025-purple.svg)](https://hacktoberfest.com/)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg?style=flat)](https://github.com/<your-username>/<your-repo>/issues)
 
 Laragram is a Telegram web client built on the Laravel framework, powered by [MadelineProto](https://github.com/danog/MadelineProto), an asynchronous PHP client/server API for the Telegram MTProto protocol. Our goal is to harness the power of these two incredible tools to create a robust, open-source web client for Telegram.
