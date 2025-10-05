@@ -1,49 +1,55 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+import './bootstrap';
+import { createApp } from 'vue';
 
-require("./bootstrap");
+// --- THEME TOGGLER LOGIC ---
+document.addEventListener('DOMContentLoaded', () => {
+    const themeToggler = document.getElementById('theme-toggle');
+    const body = document.body;
 
-window.Vue = require("vue");
+    // Function to apply the theme
+    const applyTheme = (theme) => {
+        if (theme === 'dark') {
+            body.classList.add('dark-mode');
+        } else {
+            body.classList.remove('dark-mode');
+        }
+    };
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+    // Check for saved theme in localStorage
+    const savedTheme = localStorage.getItem('theme');
+    // Check for OS preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+    // Apply saved theme, or OS preference, or default to light
+    applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
 
-Vue.component("login", require("./components/Login.vue").default);
-Vue.component(
-    "login-code-check",
-    require("./components/LoginCodeCheck.vue").default
-);
-Vue.component("dashboard", require("./components/Dashboard.vue").default);
-Vue.component("users", require("./components/Users.vue").default);
-Vue.component("groups", require("./components/Groups.vue").default);
-Vue.component("channels", require("./components/Channels.vue").default);
-Vue.component("contacts", require("./components/Contacts.vue").default);
-Vue.component(
-    "create-channel",
-    require("./components/CreateChannel.vue").default
-);
-Vue.component(
-    "create-group",
-    require("./components/CreateGroup.vue").default
-);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = new Vue({
-    el: "#app"
+    // Add click listener to the button
+    themeToggler.addEventListener('click', () => {
+        const isDarkMode = body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    });
 });
+
+// --- VUE APP INITIALIZATION ---
+
+// Import Components
+import ChatView from './components/ChatView.vue'; // The only chat component we need
+import Login from './components/Login.vue';
+import LoginCodeCheck from './components/LoginCodeCheck.vue';
+import Dashboard from './components/Dashboard.vue';
+import Contacts from './components/Contacts.vue';
+import CreateChannel from './components/CreateChannel.vue';
+import CreateGroup from './components/CreateGroup.vue';
+
+const app = createApp({});
+
+// Register Components
+app.component('chat-view', ChatView); // Register the new generic component
+app.component('login', Login);
+app.component('login-code-check', LoginCodeCheck);
+app.component('dashboard', Dashboard);
+app.component('contacts', Contacts);
+app.component('create-channel', CreateChannel);
+app.component('create-group', CreateGroup);
+
+app.mount('#app');

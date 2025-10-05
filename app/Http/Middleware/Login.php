@@ -3,25 +3,22 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use MadelineProto;
+use Illuminate\Http\Request;
+use App\Facades\MadelineProto;
 
 class Login
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        $get_user = MadelineProto::fullGetSelf();
-
-        if ($get_user == false) {
-            return $next($request);
+        try {
+            $get_user = MadelineProto::getSelf();
+            if ($get_user) {
+                return redirect('/dashboard');
+            }
+        } catch (\Throwable $e) {
+            // Not logged in, so proceed.
         }
 
-        return redirect()->intended('/dashboard');
+        return $next($request);
     }
 }

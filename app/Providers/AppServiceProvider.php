@@ -2,26 +2,27 @@
 
 namespace App\Providers;
 
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
+        // Get the instance of the alias loader.
+        $loader = AliasLoader::getInstance();
+
+        // Register our custom facade alias.
+        $loader->alias('MadelineProto', \App\Facades\MadelineProto::class);
     }
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         //
     }
